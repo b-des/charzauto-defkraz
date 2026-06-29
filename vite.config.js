@@ -5,7 +5,7 @@ import {VitePWA} from 'vite-plugin-pwa';
 
 // https://vite.dev/config/
 export default defineConfig({
-      base: '/charzauto-defkraz/',
+    base: '/charzauto-defkraz/',
     plugins: [
         react(),
         VitePWA({
@@ -13,7 +13,7 @@ export default defineConfig({
             workbox: {
                 maximumFileSizeToCacheInBytes: 3000000 // Set limit to 3 MB
             },
-            includeAssets: ['favicon.svg'],
+            includeAssets: ['favicon.png'],
             manifest: {
                 name: 'DefKraz',
                 short_name: 'DefKraz',
@@ -22,12 +22,12 @@ export default defineConfig({
                 maximumFileSizeToCacheInBytes: 3000000,
                 icons: [
                     {
-                        src: 'web-app-manifest-192x192.png',
+                        src: 'launchericon-192x192.png',
                         sizes: '192x192',
                         type: 'image/png'
                     },
                     {
-                        src: 'web-app-manifest-512x512.png',
+                        src: 'launchericon-512x512.png',
                         sizes: '512x512',
                         type: 'image/png'
                     }
