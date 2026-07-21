@@ -1,6 +1,7 @@
-import {Grid, MenuItem, TextField} from "@mui/material";
+import {Autocomplete, createFilterOptions, Grid, MenuItem, TextField} from "@mui/material";
+import {useState} from "react";
 import FormControl from "@mui/material/FormControl";
-import {InputLabel, Paper, Select, styled} from "@mui/material";
+import {FormHelperText, InputLabel, Paper, Select, styled} from "@mui/material";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: '#fff',
@@ -13,12 +14,29 @@ const Item = styled(Paper)(({theme}) => ({
     }),
 }));
 
-function VehicleParametersBar({vehicles, vehicle, onVehicleChange, orderNumber, onOrderNumberChange, chassisNumber, onChassisNumberChange, engineNumber, onEngineNumberChange}) {
+const orderNumberFilter = createFilterOptions();
+
+function VehicleParametersBar({vehicles, vehicle, onVehicleChange, orderNumber, orderNumberOptions = [], onOrderNumberChange, chassisNumber, onChassisNumberChange, engineNumber, onEngineNumberChange, parameterErrors = {}}) {
+    const [addedOrderNumberOptions, setAddedOrderNumberOptions] = useState([]);
+    const availableOrderNumberOptions = [...new Set([...orderNumberOptions, ...addedOrderNumberOptions])];
+
+    const handleOrderNumberChange = (_, newValue) => {
+        const value = typeof newValue === 'string'
+            ? newValue
+            : newValue?.inputValue ?? newValue ?? '';
+
+        if (newValue?.inputValue) {
+            setAddedOrderNumberOptions((current) => [...new Set([...current, value])]);
+        }
+
+        onOrderNumberChange({target: {value}});
+    };
+
     return (
         <Grid container size={12} spacing={1} id={"parameters-grid"}>
             <Grid size={3}>
                 <Item>
-                    <FormControl fullWidth>
+                    <FormControl fullWidth error={Boolean(parameterErrors.vehicle)}>
                         <InputLabel>Авто</InputLabel>
                         <Select
                             labelId="vehicle-select-label"
@@ -33,19 +51,42 @@ function VehicleParametersBar({vehicles, vehicle, onVehicleChange, orderNumber, 
                                 </MenuItem>
                             ))}
                         </Select>
+                        {parameterErrors.vehicle && <FormHelperText>Оберіть автомобіль</FormHelperText>}
                     </FormControl>
                 </Item>
             </Grid>
             <Grid size={3}>
                 <Item>
-                    <TextField
+                    <Autocomplete
                         id="order-number-input"
-                        label="Номер замовлення"
-                        variant="outlined"
-                        color="primary"
                         fullWidth
                         value={orderNumber}
-                        onChange={onOrderNumberChange}
+                        freeSolo
+                        selectOnFocus
+                        clearOnBlur
+                        handleHomeEndKeys
+                        options={availableOrderNumberOptions}
+                        onInputChange={(_, value) => onOrderNumberChange({target: {value}})}
+                        onChange={handleOrderNumberChange}
+                        filterOptions={(options, params) => {
+                            const filtered = orderNumberFilter(options, params);
+                            const inputValue = params.inputValue.trim();
+
+                            if (inputValue && !options.includes(inputValue)) {
+                                filtered.push({inputValue, label: `Додати «${inputValue}»`});
+                            }
+
+                            return filtered;
+                        }}
+                        getOptionLabel={(option) => typeof option === 'string' ? option : option.label ?? option.inputValue}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Номер замовлення"
+                                error={Boolean(parameterErrors.orderNumber)}
+                                helperText={parameterErrors.orderNumber ? 'Вкажіть номер замовлення' : ''}
+                            />
+                        )}
                     />
                 </Item>
             </Grid>
@@ -59,6 +100,8 @@ function VehicleParametersBar({vehicles, vehicle, onVehicleChange, orderNumber, 
                         fullWidth
                         value={chassisNumber}
                         onChange={onChassisNumberChange}
+                        error={Boolean(parameterErrors.chassisNumber)}
+                        helperText={parameterErrors.chassisNumber ? 'Вкажіть номер шасі' : ''}
                     />
                 </Item>
             </Grid>
@@ -72,6 +115,8 @@ function VehicleParametersBar({vehicles, vehicle, onVehicleChange, orderNumber, 
                         fullWidth
                         value={engineNumber}
                         onChange={onEngineNumberChange}
+                        error={Boolean(parameterErrors.engineNumber)}
+                        helperText={parameterErrors.engineNumber ? 'Вкажіть номер двигуна' : ''}
                     />
                 </Item>
             </Grid>

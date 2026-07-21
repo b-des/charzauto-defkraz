@@ -24,7 +24,7 @@ const Item = styled(Paper)(({theme}) => ({
     }),
 }));
 
-function SelectedPartsList({checked, nodeByValue, itemFlags, filterText, onSelectedItemToggle, onEditItem, onSubmit}) {
+function SelectedPartsList({checked, nodeByValue, itemFlags, filterText, onSelectedItemToggle, onEditItem, onSubmit, isSubmitting}) {
     const filteredChecked = filterText
         ? checked.filter((value) => {
             const node = nodeByValue.get(value);
@@ -97,8 +97,8 @@ function SelectedPartsList({checked, nodeByValue, itemFlags, filterText, onSelec
                     );
                 })}
             </List>
-            <Button variant="contained" color="primary" onClick={onSubmit}>
-                Відправити
+            <Button variant="contained" color="primary" onClick={onSubmit} disabled={isSubmitting}>
+                {isSubmitting ? 'Відправлення…' : 'Відправити'}
             </Button>
         </Item>
     );

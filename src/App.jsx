@@ -1,15 +1,7 @@
 import {useState, useCallback, useMemo, useRef} from 'react';
-import nodes255b from './assets/vehicles/kraz-255b-web.json';
-import nodes255v from './assets/vehicles/kraz-255v-web.json';
-import nodes260 from './assets/vehicles/kraz-260-web.json';
-import nodes260v from './assets/vehicles/kraz-260v-web.json';
-import nodes5233 from './assets/vehicles/kraz-5233-web.json';
-import nodes6322 from './assets/vehicles/kraz-6322-web.json';
-import nodes6322weichai from './assets/vehicles/kraz-6322weichai-web.json';
-import nodes6446 from './assets/vehicles/kraz-6446-web.json';
 
 import '@fortawesome/fontawesome-free/css/all.css';
-import {Grid} from "@mui/material";
+import {Alert, CircularProgress, Grid, Snackbar} from "@mui/material";
 import VehicleParametersBar from "./components/VehicleParametersBar.jsx";
 import PartsFilter from "./components/PartsFilter.jsx";
 import PartsTree from "./components/PartsTree.jsx";
@@ -17,8 +9,11 @@ import SelectedPartsList from "./components/SelectedPartsList.jsx";
 import VehicleChangeConfirmDialog from "./components/VehicleChangeConfirmDialog.jsx";
 import PartDetailsDialog from "./components/PartDetailsDialog.jsx";
 import RestoreOrderDialog from "./components/RestoreOrderDialog.jsx";
+import {useVehicles} from "./hooks/useVehicles.js";
+import {sendDefect} from "./api/orderApi.js";
 
 const STORAGE_KEY_PREFIX = 'defkraz_order_';
+const DRAFT_STORAGE_KEY = `${STORAGE_KEY_PREFIX}draft`;
 
 
 const buildNodeMap = (treeNodes) => {
@@ -43,19 +38,12 @@ const getNodeQuantity = (node) => {
     return Number.isFinite(quantity) && quantity > 0 ? quantity : 1;
 };
 
-const vehicles = [
-    {value: '255b', label: 'Краз 255 Б', nodes: nodes255b},
-    {value: '255v', label: 'Краз 255 В', nodes: nodes255v},
-    {value: '260', label: 'Краз 260', nodes: nodes260},
-    {value: '260v', label: 'Краз 260 В', nodes: nodes260v},
-    {value: '5233', label: 'Краз 5233', nodes: nodes5233},
-    {value: '6322', label: 'Краз 6322', nodes: nodes6322},
-    {value: '6322weichai', label: 'Краз 6322 Weichai', nodes: nodes6322weichai},
-    {value: '6446', label: 'Краз 6446', nodes: nodes6446}
-]
+// Add commonly used order numbers here; users can also add values from the selector.
+const orderNumberOptions = [];
 
 function VehicleRepairComponent() {
-    const [vehicle, setVehicle] = useState(vehicles[0]['value']);
+    const {vehicles, isLoading: vehiclesLoading, error: vehiclesError} = useVehicles();
+    const [vehicle, setVehicle] = useState('');
     const [checked, setChecked] = useState([]);
     const [expanded, setExpanded] = useState([]);
     const [chassisNumber, setChassisNumber] = useState('');
@@ -72,9 +60,20 @@ function VehicleRepairComponent() {
 
     const [restoreDialogOpen, setRestoreDialogOpen] = useState(false);
     const [savedOrderData, setSavedOrderData] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitNotification, setSubmitNotification] = useState(null);
+    const [showParameterValidation, setShowParameterValidation] = useState(false);
     const orderNumberDebounceRef = useRef(null);
 
-    const nodes = useMemo(() => vehicles.filter(v => v.value === vehicle)[0]['nodes'], [vehicle]);
+    const selectedVehicle = vehicle || vehicles[0]?.value || '';
+    const parameterErrors = {
+        vehicle: !selectedVehicle.trim(),
+        orderNumber: !orderNumber.trim(),
+        chassisNumber: !chassisNumber.trim(),
+        engineNumber: !engineNumber.trim(),
+    };
+    const hasParameterErrors = Object.values(parameterErrors).some(Boolean);
+    const nodes = useMemo(() => vehicles.find((item) => item.value === selectedVehicle)?.nodes ?? [], [vehicles, selectedVehicle]);
     const nodeByValue = useMemo(() => buildNodeMap(nodes), [nodes]);
 
     const onVehicleChange = useCallback((e) => {
@@ -187,7 +186,8 @@ function VehicleRepairComponent() {
                     setSavedOrderData(data);
                     setRestoreDialogOpen(true);
                 }
-            } catch { /* ignore parse errors */ }
+            } catch { /* ignore parse errors */
+            }
         }, 500);
     }, [checked.length]);
 
@@ -212,7 +212,7 @@ function VehicleRepairComponent() {
         setFilterText(e.target.value);
     }, []);
 
-    const onSubmit = useCallback(() => {
+    const onSubmit = useCallback(async () => {
         const selectedItems = checked.map((value) => {
             const node = nodeByValue.get(value);
             const flags = itemFlags[value] ?? {replace: 0, repair: 0, missing: 0};
@@ -227,21 +227,49 @@ function VehicleRepairComponent() {
             };
         });
 
-        if (orderNumber.trim()) {
-            const stateToSave = {
-                vehicle,
-                checked,
-                itemFlags,
-                chassisNumber,
-                engineNumber,
-            };
-            try {
-                localStorage.setItem(STORAGE_KEY_PREFIX + orderNumber.trim(), JSON.stringify(stateToSave));
-            } catch { /* ignore quota errors */ }
+        const stateToSave = {
+            vehicle: selectedVehicle,
+            checked,
+            itemFlags,
+            chassisNumber,
+            engineNumber,
+        };
+        try {
+            const storageKey = orderNumber.trim()
+                ? STORAGE_KEY_PREFIX + orderNumber.trim()
+                : DRAFT_STORAGE_KEY;
+            localStorage.setItem(storageKey, JSON.stringify(stateToSave));
+        } catch { /* ignore quota errors */
         }
 
-        console.log({selectedItems, orderNumber, engineNumber, chassisNumber});
-    }, [checked, orderNumber, vehicle, chassisNumber, engineNumber, itemFlags, nodeByValue]);
+
+        const dataToSend = {model: selectedVehicle, selectedItems, orderNumber, engineNumber, chassisNumber};
+        console.log(JSON.stringify(dataToSend))
+
+        setShowParameterValidation(true);
+        if (hasParameterErrors) {
+            setSubmitNotification({
+                severity: 'warning',
+                message: 'Чернетку збережено локально. Заповніть усі параметри перед відправленням.'
+            });
+            return;
+        }
+
+        try {
+            setIsSubmitting(true);
+            var result = await sendDefect(dataToSend);
+            if (!result.documentRef) {
+                setSubmitNotification({severity: 'error', message: 'Помилка при створенні дефектовки.'});
+            } else {
+                setSubmitNotification({severity: 'success', message: 'Дефектовку успішно відправлено.'});
+            }
+        } catch (error) {
+            console.error('Не вдалося відправити дефектовку.', error);
+            setSubmitNotification({severity: 'error', message: 'Не вдалося відправити дефектовку. Спробуйте ще раз.'});
+        } finally {
+            setIsSubmitting(false);
+        }
+    }, [checked, orderNumber, selectedVehicle, chassisNumber, engineNumber, itemFlags, nodeByValue, hasParameterErrors]);
 
     const filteredNodes = useMemo(() => {
         const nodeMatchesSearchString = ({label}) => (
@@ -274,16 +302,28 @@ function VehicleRepairComponent() {
     return (
         <div className="filter-container">
             <Grid container spacing={1}>
+                {vehiclesLoading && (
+                    <Grid size={12}>
+                        <CircularProgress size={24} aria-label="Завантаження автомобілів"/>
+                    </Grid>
+                )}
+                {vehiclesError && (
+                    <Grid size={12}>
+                        <Alert severity="error">{vehiclesError}</Alert>
+                    </Grid>
+                )}
                 <VehicleParametersBar
                     vehicles={vehicles}
-                    vehicle={vehicle}
+                    vehicle={selectedVehicle}
                     onVehicleChange={onVehicleChange}
                     orderNumber={orderNumber}
+                    orderNumberOptions={orderNumberOptions}
                     onOrderNumberChange={onOrderNumberChange}
                     chassisNumber={chassisNumber}
                     onChassisNumberChange={(e) => setChassisNumber(e.target.value)}
                     engineNumber={engineNumber}
                     onEngineNumberChange={(e) => setEngineNumber(e.target.value)}
+                    parameterErrors={showParameterValidation ? parameterErrors : {}}
                 />
                 <Grid size={12} id={"filter-grid"}>
                     <PartsFilter
@@ -310,6 +350,7 @@ function VehicleRepairComponent() {
                         onSelectedItemToggle={onSelectedItemToggle}
                         onEditItem={handleEditItem}
                         onSubmit={onSubmit}
+                        isSubmitting={isSubmitting}
                     />
                 </Grid>
             </Grid>
@@ -336,6 +377,17 @@ function VehicleRepairComponent() {
                 onRestore={handleRestoreOrder}
                 onDiscard={handleDiscardRestore}
             />
+            <Snackbar
+                open={Boolean(submitNotification)}
+                autoHideDuration={5000}
+                onClose={() => setSubmitNotification(null)}
+                anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+            >
+                <Alert severity={submitNotification?.severity} variant="filled"
+                       onClose={() => setSubmitNotification(null)}>
+                    {submitNotification?.message}
+                </Alert>
+            </Snackbar>
         </div>
     );
 }

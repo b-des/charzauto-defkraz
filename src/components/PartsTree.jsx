@@ -26,6 +26,7 @@ function PartsTree({nodes, checked, expanded, onCheck, onExpand}) {
                 expanded={expanded}
                 nodes={nodes}
                 expandOnClick={true}
+                onClick = {() => {}}
                 onCheck={onCheck}
                 onExpand={onExpand}
                 icons={{
