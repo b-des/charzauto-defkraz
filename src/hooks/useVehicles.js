@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {getVehicles} from '../api/vehiclesApi.js';
+import nodes from '../assets/vehicles/all.json';
 
 export function useVehicles() {
     const [vehicles, setVehicles] = useState([]);
@@ -13,13 +14,14 @@ export function useVehicles() {
             .then(setVehicles)
             .catch((requestError) => {
                 if (requestError.name !== 'AbortError') {
-                    setError('Не вдалося завантажити список автомобілів.');
+                    setError('Не вдалося завантажити список автомобілів із сервера.');
                 }
             })
             .finally(() => {
                 if (!controller.signal.aborted) {
                     setIsLoading(false);
                 }
+                setVehicles(nodes);
             });
 
         return () => controller.abort();

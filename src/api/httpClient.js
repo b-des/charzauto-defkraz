@@ -1,7 +1,6 @@
 const HOST = import.meta.env.VITE_API_HOST ?? 'http://localhost:5155';
 
 export async function getJson(url, {signal} = {}) {
-    console.log(url);
     const response = await fetch(HOST + url, {signal});
 
     if (!response.ok) {
@@ -14,7 +13,6 @@ export async function getJson(url, {signal} = {}) {
 }
 
 export async function postJson(url, data, {signal} = {}) {
-
     const response = await fetch(HOST + url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

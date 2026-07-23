@@ -309,7 +309,7 @@ function VehicleRepairComponent() {
                 )}
                 {vehiclesError && (
                     <Grid size={12}>
-                        <Alert severity="error">{vehiclesError}</Alert>
+                        <Alert severity="error" onClose={() => {}}>{vehiclesError}</Alert>
                     </Grid>
                 )}
                 <VehicleParametersBar
