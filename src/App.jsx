@@ -21,6 +21,7 @@ import RestoreOrderDialog from "./components/RestoreOrderDialog.jsx";
 import {useVehicles} from "./hooks/useVehicles.js";
 import {sendDefect} from "./api/orderApi.js";
 import {ArrowCircleDown} from "@mui/icons-material";
+import PullToRefresh from "react-simple-pull-to-refresh";
 
 const STORAGE_KEY_PREFIX = 'defkraz_order_';
 const DRAFT_STORAGE_KEY = `${STORAGE_KEY_PREFIX}draft`;
@@ -309,7 +310,23 @@ function VehicleRepairComponent() {
 
     const pendingNode = pendingPartValue ? nodeByValue.get(pendingPartValue) : null;
 
+    const handleRefresh = () => {
+        return new Promise((resolve, reject) => {
+            // Intercept with a confirmation prompt
+            const shouldRefresh = window.confirm("Are you sure you want to refresh? Unsaved changes will be lost.");
+
+            if (shouldRefresh) {
+                // Run your data fetching logic
+                resolve();
+            } else {
+                // Cancel the refresh animation immediately
+                reject();
+            }
+        });
+    };
+
     return (
+        <PullToRefresh onRefresh={handleRefresh}>
         <div className="filter-container">
             <Grid container spacing={1} sx={{height: '100%', flexDirection: 'column', flexWrap: 'nowrap', minHeight: 0}}>
                 {vehiclesLoading && (
@@ -414,6 +431,7 @@ function VehicleRepairComponent() {
                 </Alert>
             </Snackbar>
         </div>
+        </PullToRefresh>
     );
 }
 

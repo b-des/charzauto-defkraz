@@ -15,6 +15,7 @@ export function useVehicles() {
             .catch((requestError) => {
                 if (requestError.name !== 'AbortError') {
                     setError('Не вдалося завантажити список автомобілів із сервера.');
+                    setTimeout(() => setError(""), 5000)
                 }
             })
             .finally(() => {
