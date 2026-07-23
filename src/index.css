@@ -60,10 +60,15 @@ body {
   margin: 10px;
   text-align: center;
   border-inline: 1px solid var(--border);
-  min-height: 100svh;
+  height: calc(100svh - 20px);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+}
+
+.filter-container {
+  height: 100%;
+  min-height: 0;
 }
 
 h1,

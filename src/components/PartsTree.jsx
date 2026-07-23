@@ -10,6 +10,9 @@ const Item = styled(Paper)(({theme}) => ({
     padding: theme.spacing(1),
     textAlign: 'center',
     color: (theme.vars ?? theme).palette.text.secondary,
+    width: '100%',
+    height: '100%',
+    overflowY: 'auto',
     ...theme.applyStyles('dark', {
         backgroundColor: '#1A2027',
     }),

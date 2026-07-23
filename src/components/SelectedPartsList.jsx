@@ -19,6 +19,11 @@ const Item = styled(Paper)(({theme}) => ({
     padding: theme.spacing(1),
     textAlign: 'center',
     color: (theme.vars ?? theme).palette.text.secondary,
+    width: '100%',
+    height: '100%',
+    minHeight: 0,
+    display: 'flex',
+    flexDirection: 'column',
     ...theme.applyStyles('dark', {
         backgroundColor: '#1A2027',
     }),
@@ -39,7 +44,7 @@ function SelectedPartsList({checked, nodeByValue, itemFlags, filterText, onSelec
                 Вибрано: {checked.length} деталей
                 {filterText && filteredChecked.length !== checked.length && ` (показано: ${filteredChecked.length})`}
             </Typography>
-            <List sx={{width: '100%', bgcolor: 'background.paper'}}>
+            <List sx={{width: '100%', flex: 1, minHeight: 0, overflowY: 'auto', bgcolor: 'background.paper'}}>
                 {filteredChecked.map((value) => {
                     const labelId = `checkbox-list-label-${value}`;
                     const node = nodeByValue.get(value);

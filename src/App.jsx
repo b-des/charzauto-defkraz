@@ -301,7 +301,7 @@ function VehicleRepairComponent() {
 
     return (
         <div className="filter-container">
-            <Grid container spacing={1}>
+            <Grid container spacing={1} sx={{height: '100%', flexDirection: 'column', flexWrap: 'nowrap', minHeight: 0}}>
                 {vehiclesLoading && (
                     <Grid size={12}>
                         <CircularProgress size={24} aria-label="Завантаження автомобілів"/>
@@ -332,26 +332,28 @@ function VehicleRepairComponent() {
                         onClear={() => setFilterText('')}
                     />
                 </Grid>
-                <Grid size={8}>
-                    <PartsTree
-                        nodes={filteredNodes}
-                        checked={checked}
-                        expanded={expanded}
-                        onCheck={onCheck}
-                        onExpand={onExpand}
-                    />
-                </Grid>
-                <Grid size={4} id={"selected-grid"}>
-                    <SelectedPartsList
-                        checked={checked}
-                        nodeByValue={nodeByValue}
-                        itemFlags={itemFlags}
-                        filterText={filterText}
-                        onSelectedItemToggle={onSelectedItemToggle}
-                        onEditItem={handleEditItem}
-                        onSubmit={onSubmit}
-                        isSubmitting={isSubmitting}
-                    />
+                <Grid container size={12} spacing={1} sx={{flex: 1, minHeight: 0, flexWrap: 'nowrap'}}>
+                    <Grid size={8} sx={{display: 'flex', minWidth: 0}}>
+                        <PartsTree
+                            nodes={filteredNodes}
+                            checked={checked}
+                            expanded={expanded}
+                            onCheck={onCheck}
+                            onExpand={onExpand}
+                        />
+                    </Grid>
+                    <Grid size={4} id={"selected-grid"} sx={{display: 'flex', minWidth: 0}}>
+                        <SelectedPartsList
+                            checked={checked}
+                            nodeByValue={nodeByValue}
+                            itemFlags={itemFlags}
+                            filterText={filterText}
+                            onSelectedItemToggle={onSelectedItemToggle}
+                            onEditItem={handleEditItem}
+                            onSubmit={onSubmit}
+                            isSubmitting={isSubmitting}
+                        />
+                    </Grid>
                 </Grid>
             </Grid>
             <VehicleChangeConfirmDialog
