@@ -1,7 +1,16 @@
 import {useState, useCallback, useMemo, useRef} from 'react';
 
 import '@fortawesome/fontawesome-free/css/all.css';
-import {Alert, CircularProgress, Grid, Snackbar} from "@mui/material";
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Alert,
+    CircularProgress,
+    Grid,
+    Snackbar,
+    Typography
+} from "@mui/material";
 import VehicleParametersBar from "./components/VehicleParametersBar.jsx";
 import PartsFilter from "./components/PartsFilter.jsx";
 import PartsTree from "./components/PartsTree.jsx";
@@ -11,6 +20,7 @@ import PartDetailsDialog from "./components/PartDetailsDialog.jsx";
 import RestoreOrderDialog from "./components/RestoreOrderDialog.jsx";
 import {useVehicles} from "./hooks/useVehicles.js";
 import {sendDefect} from "./api/orderApi.js";
+import {ArrowCircleDown} from "@mui/icons-material";
 
 const STORAGE_KEY_PREFIX = 'defkraz_order_';
 const DRAFT_STORAGE_KEY = `${STORAGE_KEY_PREFIX}draft`;
@@ -312,28 +322,41 @@ function VehicleRepairComponent() {
                         <Alert severity="error" onClose={() => {}}>{vehiclesError}</Alert>
                     </Grid>
                 )}
-                <VehicleParametersBar
-                    vehicles={vehicles}
-                    vehicle={selectedVehicle}
-                    onVehicleChange={onVehicleChange}
-                    orderNumber={orderNumber}
-                    orderNumberOptions={orderNumberOptions}
-                    onOrderNumberChange={onOrderNumberChange}
-                    chassisNumber={chassisNumber}
-                    onChassisNumberChange={(e) => setChassisNumber(e.target.value)}
-                    engineNumber={engineNumber}
-                    onEngineNumberChange={(e) => setEngineNumber(e.target.value)}
-                    parameterErrors={showParameterValidation ? parameterErrors : {}}
-                />
-                <Grid size={12} id={"filter-grid"}>
-                    <PartsFilter
-                        filterText={filterText}
-                        onFilterChange={onFilterChange}
-                        onClear={() => setFilterText('')}
-                    />
-                </Grid>
-                <Grid container size={12} spacing={1} sx={{flex: 1, minHeight: 0, flexWrap: 'nowrap'}}>
-                    <Grid size={8} sx={{display: 'flex', minWidth: 0}}>
+                <Accordion color="primary" sx={{'&.Mui-expanded': {margin: 0}}}>
+                    <AccordionSummary
+                        color="primary"
+                        expandIcon={<ArrowCircleDown />}
+                        aria-controls={`panel1-content`}
+                        id={`panel1-header`}
+                    >
+                        <Typography component="span">Службова інформація</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <VehicleParametersBar
+                            vehicles={vehicles}
+                            vehicle={selectedVehicle}
+                            onVehicleChange={onVehicleChange}
+                            orderNumber={orderNumber}
+                            orderNumberOptions={orderNumberOptions}
+                            onOrderNumberChange={onOrderNumberChange}
+                            chassisNumber={chassisNumber}
+                            onChassisNumberChange={(e) => setChassisNumber(e.target.value)}
+                            engineNumber={engineNumber}
+                            onEngineNumberChange={(e) => setEngineNumber(e.target.value)}
+                            parameterErrors={showParameterValidation ? parameterErrors : {}}
+                        />
+                        <Grid size={12} id={"filter-grid"}>
+                            <PartsFilter
+                                filterText={filterText}
+                                onFilterChange={onFilterChange}
+                                onClear={() => setFilterText('')}
+                            />
+                        </Grid>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Grid container size={12} spacing={1} sx={{flex: 1, minHeight: 0, flexWrap: 'nowrap', position: 'relative'}}>
+                    <Grid size={8} sx={{display: 'flex', minWidth: 0, position: 'relative'}} className="parts-tree-container">
                         <PartsTree
                             nodes={filteredNodes}
                             checked={checked}
