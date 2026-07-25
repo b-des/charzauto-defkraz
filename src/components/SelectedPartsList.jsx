@@ -33,7 +33,16 @@ const Item = styled(Paper)(({theme}) => ({
     }),
 }));
 
-function SelectedPartsList({checked, nodeByValue, itemFlags, filterText, onSelectedItemToggle, onEditItem, onSubmit, isSubmitting}) {
+function SelectedPartsList({
+                               checked,
+                               nodeByValue,
+                               itemFlags,
+                               filterText,
+                               onSelectedItemToggle,
+                               onEditItem,
+                               onSubmit,
+                               isSubmitting
+                           }) {
     const filteredChecked = filterText
         ? checked.filter((value) => {
             const node = nodeByValue.get(value);
@@ -42,15 +51,15 @@ function SelectedPartsList({checked, nodeByValue, itemFlags, filterText, onSelec
         })
         : checked;
 
-    const handleDelete = async (value) => {
-        const confirmed = await showDeleteConfirmation({
+    const handleDelete = (value) => {
+        showDeleteConfirmation({
             title: 'Підтвердіть дію',
             description: 'Видалити елемент зі списку?',
+        }).then(confirmed => {
+            if (confirmed) {
+                onSelectedItemToggle(value);
+            }
         });
-
-        if (confirmed) {
-            onSelectedItemToggle(value);
-        }
     };
 
     return (
