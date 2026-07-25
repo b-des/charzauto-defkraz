@@ -1,4 +1,4 @@
-const HOST = import.meta.env.VITE_API_HOST ?? 'http://localhost:5155';
+const HOST = import.meta.env.VITE_API_HOST ?? 'http://localhost:5157';
 
 export async function getJson(url, {signal} = {}) {
     const response = await fetch(HOST + url, {signal});

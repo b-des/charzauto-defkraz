@@ -318,6 +318,7 @@ function VehicleRepairComponent() {
             if (shouldRefresh) {
                 // Run your data fetching logic
                 resolve();
+                window.location = window.location.origin;
             } else {
                 // Cancel the refresh animation immediately
                 reject();
@@ -373,7 +374,7 @@ function VehicleRepairComponent() {
                 </Accordion>
 
                 <Grid container size={12} spacing={1} sx={{flex: 1, minHeight: 0, flexWrap: 'nowrap', position: 'relative'}}>
-                    <Grid size={8} sx={{display: 'flex', minWidth: 0, position: 'relative'}} className="parts-tree-container">
+                    <Grid size={8} sx={{display: 'flex', minWidth: 0, position: 'relative', padding: 0}} className="parts-tree-container">
                         <PartsTree
                             nodes={filteredNodes}
                             checked={checked}

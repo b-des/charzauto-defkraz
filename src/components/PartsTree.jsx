@@ -1,6 +1,6 @@
 import CheckboxTree from 'react-checkbox-tree';
 import {Paper, styled} from "@mui/material";
-import {CheckBoxOutlineBlank, CheckBoxOutlined, Settings} from "@mui/icons-material";
+import {CheckBoxOutlineBlank, CheckBoxOutlined, Folder, FolderOpen, Settings} from "@mui/icons-material";
 
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 
@@ -33,9 +33,11 @@ function PartsTree({nodes, checked, expanded, onCheck, onExpand}) {
                 onCheck={onCheck}
                 onExpand={onExpand}
                 icons={{
+                    parentClose: <Folder color="primary"/>,
+                    parentOpen: <FolderOpen color="primary"/>,
                     check: <CheckBoxOutlined color="primary"/>,
                     uncheck: <CheckBoxOutlineBlank color="primary"/>,
-                    leaf: <Settings color="primary"/>
+                    leaf: null
                 }}
             />
         </Item>

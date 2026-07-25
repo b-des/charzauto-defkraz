@@ -12,6 +12,10 @@ import {
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import {Edit} from "@mui/icons-material";
+import {confirmable, createConfirmation} from "react-confirm";
+import ConfirmationDialog from "./ConfirmationDialog.jsx";
+
+const showDeleteConfirmation = createConfirmation(confirmable(ConfirmationDialog));
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: '#fff',
@@ -38,6 +42,17 @@ function SelectedPartsList({checked, nodeByValue, itemFlags, filterText, onSelec
         })
         : checked;
 
+    const handleDelete = async (value) => {
+        const confirmed = await showDeleteConfirmation({
+            title: 'Підтвердіть дію',
+            description: 'Видалити елемент зі списку?',
+        });
+
+        if (confirmed) {
+            onSelectedItemToggle(value);
+        }
+    };
+
     return (
         <Item>
             <Typography variant="subtitle1" component="h3">
@@ -63,7 +78,7 @@ function SelectedPartsList({checked, nodeByValue, itemFlags, filterText, onSelec
                             }}
                         >
                             <Checkbox
-                                onClick={() => onSelectedItemToggle(value)}
+                                onClick={() => handleDelete(value)}
                                 edge="start"
                                 checked={true}
                                 tabIndex={-1}

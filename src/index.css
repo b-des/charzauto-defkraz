@@ -60,7 +60,7 @@ body {
   margin: 0;
   text-align: center;
   border-inline: 1px solid var(--border);
-  height: calc(100svh - 20px);
+  height: calc(100svh - 0px);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -122,4 +122,8 @@ code {
 
 .parts-tree-container > *{
   position: relative;
+}
+
+.rct-node-clickable{
+  display: block;
 }
