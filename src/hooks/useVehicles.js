@@ -14,7 +14,7 @@ export function useVehicles() {
             .then(setVehicles)
             .catch((requestError) => {
                 if (requestError.name !== 'AbortError') {
-                    setError('Не вдалося завантажити список автомобілів із сервера.');
+                    setError('Не вдалося завантажити список автомобілів із сервера. Інформація про деталі може бути застарілою!');
                     setTimeout(() => setError(""), 5000)
                 }
             })

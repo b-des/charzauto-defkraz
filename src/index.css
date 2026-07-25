@@ -58,14 +58,14 @@ body {
     margin: 0;
     text-align: center;
     border-inline: 1px solid var(--border);
-    height: calc(100svh - 0px);
+    height: 100svh;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
 }
 
 .filter-container {
-    height: 100%;
+    height: calc(100svh - 16px);
     min-height: 0;
 }
 
