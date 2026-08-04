@@ -162,3 +162,9 @@ dist-ssr
 *.sln
 *.sw?
 >>>>>>> 2e0f457 (Initial commit)
+
+# Misc
+generated.*
+/src/api/model/
+/src/api/generated/
+openapi.json
