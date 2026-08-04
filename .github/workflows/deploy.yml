@@ -26,6 +26,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Download OpenAPI
+        run: |
+          curl -L \
+            https://github.com/b-des/charz-erp-bridge-api/releases/latest/download/openapi.json \
+            -o openapi.json
+
+      - name: Generate client
+        run: npm run generate:api
+
       - name: Build project
         run: npm run build
         env:

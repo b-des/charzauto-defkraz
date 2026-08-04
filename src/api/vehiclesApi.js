@@ -1,14 +1,11 @@
-import {getJson} from './httpClient.js';
+import {getVehicles} from "./generated/charzAPI.ts";
 
-const VEHICLES_API_URL = '/api/vehicles';
+export async function getVehiclesCatalog({signal} = {}) {
+    const {data: response} = await getVehicles({signal});
 
-export async function getVehicles({signal} = {}) {
-    const payload = await getJson(VEHICLES_API_URL, {signal});
-    const vehicles = Array.isArray(payload) ? payload : payload.value ?? payload.Value;
-
-    if (!Array.isArray(vehicles)) {
+    if (!Array.isArray(response)) {
         throw new Error('The API returned an invalid vehicles payload');
     }
 
-    return vehicles;
+    return response;
 }
