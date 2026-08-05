@@ -162,3 +162,5 @@ dist-ssr
 *.sln
 *.sw?
 >>>>>>> 2e0f457 (Initial commit)
+/src/api/model/
+/src/api/generated/

@@ -1,10 +1,11 @@
 import CheckboxTree from 'react-checkbox-tree';
 import {Paper, styled} from "@mui/material";
-import {CheckBoxOutlineBlank, CheckBoxOutlined, Folder, FolderOpen, Settings} from "@mui/icons-material";
+import {CheckBoxOutlineBlank, CheckBoxOutlined, Folder, FolderOpen} from "@mui/icons-material";
 
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import {confirmable, createConfirmation} from "react-confirm";
 import ConfirmationDialog from "./ConfirmationDialog.jsx";
+import {useMemo} from "react";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: '#fff',
@@ -19,6 +20,19 @@ const Item = styled(Paper)(({theme}) => ({
         backgroundColor: '#1A2027',
     }),
 }));
+
+const getPartNumber = (value) => value.split('#')[0];
+
+const createDisplayNodes = (nodes) =>
+    nodes.map((node) => ({
+        ...node,
+        label: node.children?.length
+            ? node.label
+            : `${node.label} (${getPartNumber(node.value)}, ${node.quantity})`,
+        children: node.children
+            ? createDisplayNodes(node.children)
+            : undefined,
+    }));
 
 function PartsTree({nodes, checked, expanded, onCheck, onExpand}) {
     const showDeleteConfirmation = createConfirmation(confirmable(ConfirmationDialog));
@@ -38,6 +52,7 @@ function PartsTree({nodes, checked, expanded, onCheck, onExpand}) {
             }
         });
     }
+    const displayNodes = useMemo(() => createDisplayNodes(nodes), [nodes]);
     return (
         <Item>
             <CheckboxTree
@@ -46,7 +61,7 @@ function PartsTree({nodes, checked, expanded, onCheck, onExpand}) {
                 showNodeTitle={false}
                 checked={checked}
                 expanded={expanded}
-                nodes={nodes}
+                nodes={displayNodes}
                 expandOnClick={true}
                 onClick={() => {
                 }}

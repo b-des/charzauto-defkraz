@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   build-and-deploy:
+    name: Build application and deploy
     runs-on: ubuntu-latest
 
     steps:
