@@ -23,12 +23,21 @@ const Item = styled(Paper)(({theme}) => ({
 
 const getPartNumber = (value) => value.split('#')[0];
 
+const PartNumber = styled('span')(({theme}) => ({
+    color: theme.palette.primary.main,
+    fontSize: theme.typography.body2,
+    fontWeight: 600,
+}));
+
 const createDisplayNodes = (nodes) =>
     nodes.map((node) => ({
         ...node,
-        label: node.children?.length
-            ? node.label
-            : `${node.label} (${getPartNumber(node.value)}, ${node.quantity})`,
+        label: node.children?.length ? node.label : (
+            <>
+                {node.label}{' '}
+                <PartNumber>({getPartNumber(node.value)}, {node.quantity})</PartNumber>
+            </>
+        ),
         children: node.children
             ? createDisplayNodes(node.children)
             : undefined,
