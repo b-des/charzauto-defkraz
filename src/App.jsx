@@ -22,6 +22,11 @@ import {useVehicles} from "./hooks/useVehicles.js";
 import {sendDefect} from "./api/orderApi.js";
 import {ArrowCircleDown} from "@mui/icons-material";
 import PullToRefresh from "react-simple-pull-to-refresh";
+import {
+    getFinalPartValue,
+    hasSelectedSizeChoice,
+    hasSizeChoices
+} from "./utils/partValue.js";
 
 const STORAGE_KEY_PREFIX = 'defkraz_order_';
 const DRAFT_STORAGE_KEY = `${STORAGE_KEY_PREFIX}draft`;
@@ -155,7 +160,13 @@ function VehicleRepairComponent() {
     const handlePartDialogApply = useCallback((values) => {
         setItemFlags((current) => ({
             ...current,
-            [pendingPartValue]: {replace: values.replace, repair: values.repair, missing: values.missing}
+            [pendingPartValue]: {
+                replace: values.replace,
+                repair: values.repair,
+                missing: values.missing,
+                ...(values.value !== undefined && {value: values.value}),
+                ...(values.sizeValue !== undefined && {sizeValue: values.sizeValue}),
+            }
         }));
         setPartDialogOpen(false);
         setPendingPartValue(null);
@@ -224,12 +235,17 @@ function VehicleRepairComponent() {
     }, []);
 
     const onSubmit = useCallback(async () => {
+        const itemMissingSize = checked.find((value) => {
+            const node = nodeByValue.get(value);
+
+            return hasSizeChoices(node) && !hasSelectedSizeChoice(node, itemFlags[value]?.sizeValue);
+        });
         const selectedItems = checked.map((value) => {
             const node = nodeByValue.get(value);
             const flags = itemFlags[value] ?? {replace: 0, repair: 0, missing: 0};
 
             return {
-                "value": value.split('#')[0],
+                "value": getFinalPartValue(node, value, flags),
                 label: node?.label ?? value.split('#')[0],
                 quantity: getNodeQuantity(node),
                 replace: flags.replace,
@@ -258,6 +274,14 @@ function VehicleRepairComponent() {
         console.log(JSON.stringify(dataToSend))
 
         setShowParameterValidation(true);
+        if (itemMissingSize) {
+            const node = nodeByValue.get(itemMissingSize);
+            setSubmitNotification({
+                severity: 'warning',
+                message: `Оберіть розмір для деталі «${node?.label ?? itemMissingSize.split('#')[0]}».`
+            });
+            return;
+        }
         if (hasParameterErrors) {
             setSubmitNotification({
                 severity: 'warning',
@@ -408,6 +432,12 @@ function VehicleRepairComponent() {
                 open={partDialogOpen}
                 partLabel={pendingNode?.label ?? ''}
                 partValue={pendingPartValue ?? ''}
+                isValueEditable={
+                    !hasSizeChoices(pendingNode)
+                    && (pendingNode?.editable === true || pendingNode?.multichoice === true)
+                }
+                isMultiChoice={pendingNode?.multichoice === true}
+                sizeItems={pendingNode?.sizeItems ?? []}
                 maxQuantity={getNodeQuantity(pendingNode)}
                 initialValues={isEditingExistingPart && pendingPartValue ? itemFlags[pendingPartValue] : undefined}
                 onApply={handlePartDialogApply}

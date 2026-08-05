@@ -1,34 +1,68 @@
-import {useState, useEffect, useMemo} from 'react';
+import {useState, useEffect} from 'react';
 import {
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
+    FormControl,
+    FormHelperText,
+    InputLabel,
+    MenuItem,
+    Select,
     Stack,
+    TextField,
     Typography,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import NumberSpinner from "./NumberSpinner.jsx";
+import {getBasePartValue, getSizeChoices} from "../utils/partValue.js";
 
-function PartDetailsDialog({open, partLabel, partValue, maxQuantity, initialValues, onApply, onCancel}) {
+function PartDetailsDialog({
+                               open,
+                               partLabel,
+                               partValue,
+                               isValueEditable,
+                               isMultiChoice,
+                               sizeItems,
+                               maxQuantity,
+                               initialValues,
+                               onApply,
+                               onCancel
+                           }) {
     const [replace, setReplace] = useState(0);
     const [repair, setRepair] = useState(0);
     const [missing, setMissing] = useState(0);
+    const [value, setValue] = useState('');
+    const [sizeValue, setSizeValue] = useState('');
+    const sizeChoices = getSizeChoices({multichoice: isMultiChoice, sizeItems});
+    const requiresSizeChoice = sizeChoices.length > 0;
+    const hasValidSizeChoice = sizeChoices.some((item) => item.value === sizeValue);
 
     useEffect(() => {
         if (open) {
             setReplace(initialValues?.replace ?? 0);
             setRepair(initialValues?.repair ?? 0);
             setMissing(initialValues?.missing ?? 0);
+            setValue(initialValues?.value ?? partValue?.split('#')[0] ?? '');
+            setSizeValue(String(initialValues?.sizeValue ?? ''));
         }
-    }, [open, initialValues]);
+    }, [open, initialValues, partValue]);
 
     const total = replace + repair + missing;
     const remaining = maxQuantity - total;
-    const isValid = total > 0 && total <= maxQuantity;
+    const isValid = total > 0
+        && total <= maxQuantity
+        && (!isValueEditable || value.trim().length > 0)
+        && (!requiresSizeChoice || hasValidSizeChoice);
 
     const handleApply = () => {
-        onApply({replace, repair, missing});
+        onApply({
+            replace,
+            repair,
+            missing,
+            ...(isValueEditable && {value: value.trim()}),
+            ...(requiresSizeChoice && {sizeValue}),
+        });
     };
 
     return (
@@ -41,6 +75,42 @@ function PartDetailsDialog({open, partLabel, partValue, maxQuantity, initialValu
                 </Typography>
 
                 <Stack spacing={2}>
+                    {requiresSizeChoice && (
+                        <FormControl fullWidth size="small" required error={!hasValidSizeChoice}>
+                            <InputLabel id="part-size-label">Розмір</InputLabel>
+                            <Select
+                                labelId="part-size-label"
+                                label="Розмір"
+                                value={sizeValue}
+                                onChange={(event) => setSizeValue(event.target.value)}
+                                autoFocus
+                            >
+                                {sizeChoices.map((item, index) => (
+                                    <MenuItem key={`${item.value}-${index}`} value={item.value}>
+                                        {item.label}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                            {!hasValidSizeChoice && <FormHelperText>Оберіть один розмір</FormHelperText>}
+                            {hasValidSizeChoice && (
+                                <FormHelperText>
+                                    Підсумкове значення: {sizeValue}{getBasePartValue(partValue)}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+                    )}
+                    {isValueEditable && (
+                        <TextField
+                            label="Значення"
+                            value={value}
+                            onChange={(event) => setValue(event.target.value)}
+                            error={!value.trim()}
+                            helperText={!value.trim() ? 'Вкажіть значення деталі' : ' '}
+                            size="small"
+                            fullWidth
+                            autoFocus={!requiresSizeChoice}
+                        />
+                    )}
                     <Stack direction="row" alignItems="center">
                         <Typography variant="body2" sx={{width: 100, flexShrink: 0}}>На заміну</Typography>
                         <NumberSpinner

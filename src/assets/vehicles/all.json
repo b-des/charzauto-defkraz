@@ -413,16 +413,19 @@
           },
           {
             "value": "#51ef6af7",
+            "editable": true,
             "label": "Кольца поршньові (к.-т)",
             "quantity": "1"
           },
           {
             "value": "#a3816595",
+            "editable": true,
             "label": "Вкладиші корінні(к.-т)",
             "quantity": "1"
           },
           {
             "value": "#275c45a5",
+            "editable": true,
             "label": "Вкладиші шатуні (к.-т)",
             "quantity": ""
           },
@@ -645,6 +648,7 @@
           },
           {
             "value": "#e8210fc4",
+            "editable": true,
             "label": "Підшипник 170314 (50314)",
             "quantity": "1"
           },
@@ -655,16 +659,19 @@
           },
           {
             "value": "#21a13c9e",
+            "editable": true,
             "label": "Підшипник 60205 (перв. вал перед.)",
             "quantity": "1"
           },
           {
             "value": "#91f1c18a",
+            "editable": true,
             "label": "Підшипник 592708",
             "quantity": "1"
           },
           {
             "value": "#d9381077",
+            "editable": true,
             "label": "Підшипник 50411",
             "quantity": "1"
           },
@@ -675,11 +682,13 @@
           },
           {
             "value": "#1bd9bc31",
+            "editable": true,
             "label": "Підшипник 102308",
             "quantity": "1"
           },
           {
             "value": "#f61dedf5",
+            "editable": true,
             "label": "Підшипник 692409",
             "quantity": "1"
           },
@@ -690,6 +699,7 @@
           },
           {
             "value": "#62e9022c",
+            "editable": true,
             "label": "Підшипник 64907К",
             "quantity": "2"
           },
@@ -745,6 +755,7 @@
           },
           {
             "value": "#68c95a7d",
+            "editable": true,
             "label": "Масляна",
             "quantity": "3"
           },
@@ -1410,6 +1421,7 @@
             "children": [
               {
                 "value": "#83f02142",
+                "editable": true,
                 "label": "Гальмо стоянкове у зборі",
                 "quantity": "1"
               },
@@ -1657,16 +1669,19 @@
               },
               {
                 "value": "#fd48f8b9",
+                "editable": true,
                 "label": "Сальник 102х72",
                 "quantity": "3"
               },
               {
                 "value": "#c16e19b6",
+                "editable": true,
                 "label": "Сальник 90х72",
                 "quantity": "1"
               },
               {
                 "value": "#a0eea482",
+                "editable": true,
                 "label": "Сальник 54х80",
                 "quantity": "1"
               }
@@ -1929,11 +1944,13 @@
               },
               {
                 "value": "#a8d7ad3a",
+                "editable": true,
                 "label": "Накладка гальмівна",
                 "quantity": "8"
               },
               {
                 "value": "#9876edcd",
+                "editable": true,
                 "label": "Заклепка",
                 "quantity": "64"
               },
@@ -2055,6 +2072,7 @@
               },
               {
                 "value": "#f9d82037",
+                "editable": true,
                 "label": "Кр-йн гальм. циліндра прав./лев.",
                 "quantity": "2/2"
               }
@@ -3223,6 +3241,7 @@
             "children": [
               {
                 "value": "#247e4ae9",
+                "editable": true,
                 "label": "Циліндр гальмівний у зборі",
                 "quantity": "6"
               },
@@ -3981,6 +4000,7 @@
               },
               {
                 "value": "#f3c88d8d",
+                "editable": true,
                 "label": "Комплект шлангів пневмосистеми",
                 "quantity": "1"
               },
@@ -4001,6 +4021,7 @@
               },
               {
                 "value": "#7371bf80",
+                "editable": true,
                 "label": "Шланг пневмосистеми КрАЗ",
                 "quantity": "6"
               },
@@ -4267,6 +4288,7 @@
               },
               {
                 "value": "#1b550f63",
+                "editable": true,
                 "label": "Підігрівач передпусковий",
                 "quantity": "1"
               }
@@ -4502,16 +4524,19 @@
           },
           {
             "value": "#945bb42d",
+            "editable": true,
             "label": "Болти різні",
             "quantity": "44"
           },
           {
             "value": "#66668ee0",
+            "editable": true,
             "label": "Гайки різні",
             "quantity": "44"
           },
           {
             "value": "#696d06d1",
+            "editable": true,
             "label": "Пальці",
             "quantity": "16"
           },
@@ -5134,11 +5159,13 @@
           },
           {
             "value": "#f88c2c07",
+            "editable": true,
             "label": "Ящик акумуляторних батарей",
             "quantity": "1"
           },
           {
             "value": "#0e8dae2c",
+            "editable": true,
             "label": "Кришка акумулят. ящика",
             "quantity": "1"
           }
@@ -5276,6 +5303,7 @@
               },
               {
                 "value": "#cbc35892",
+                "editable": true,
                 "label": "Управління лебідкою",
                 "quantity": "1"
               },
@@ -5331,6 +5359,7 @@
               },
               {
                 "value": "#0a8c9df2",
+                "editable": true,
                 "label": "Ящик інструментальний",
                 "quantity": "1"
               }
@@ -6745,16 +6774,19 @@
               },
               {
                 "value": "#8aada139",
+                "editable": true,
                 "label": "Шарикопідшипник 303",
                 "quantity": "1"
               },
               {
                 "value": "#9ee966eb",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "1"
               },
               {
                 "value": "#8ba4fd04",
+                "editable": true,
                 "label": "Шарикопідшипник 160703",
                 "quantity": "2"
               }
@@ -6802,11 +6834,13 @@
               },
               {
                 "value": "#4981bf85",
+                "editable": true,
                 "label": "Шарикопідшипник 305",
                 "quantity": "1"
               },
               {
                 "value": "#3d372f10",
+                "editable": true,
                 "label": "Шарикопідшипник 205",
                 "quantity": "1"
               }
@@ -7065,6 +7099,7 @@
               },
               {
                 "value": "#a8688daf",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "2"
               }
@@ -8879,16 +8914,19 @@
           },
           {
             "value": "#b7ae1f5c",
+            "editable": true,
             "label": "Кольца поршньові (к.-т)",
             "quantity": "1"
           },
           {
             "value": "#7556031b",
+            "editable": true,
             "label": "Вкладиші корінні(к.-т)",
             "quantity": "1"
           },
           {
             "value": "#2b6720e9",
+            "editable": true,
             "label": "Вкладиші шатуні (к.-т)",
             "quantity": ""
           },
@@ -9111,6 +9149,7 @@
           },
           {
             "value": "#b0f00bf4",
+            "editable": true,
             "label": "Підшипник 170314 (50314)",
             "quantity": "1"
           },
@@ -9121,16 +9160,19 @@
           },
           {
             "value": "#ddfc35e6",
+            "editable": true,
             "label": "Підшипник 60205 (перв. вал перед.)",
             "quantity": "1"
           },
           {
             "value": "#3aa5f80a",
+            "editable": true,
             "label": "Підшипник 592708",
             "quantity": "1"
           },
           {
             "value": "#fee1501d",
+            "editable": true,
             "label": "Підшипник 50411",
             "quantity": "1"
           },
@@ -9141,11 +9183,13 @@
           },
           {
             "value": "#d241a71a",
+            "editable": true,
             "label": "Підшипник 102308",
             "quantity": "1"
           },
           {
             "value": "#b8d87021",
+            "editable": true,
             "label": "Підшипник 692409",
             "quantity": "1"
           },
@@ -9156,6 +9200,7 @@
           },
           {
             "value": "#5d665472",
+            "editable": true,
             "label": "Підшипник 64907К",
             "quantity": "2"
           },
@@ -9211,6 +9256,7 @@
           },
           {
             "value": "#b071adad",
+            "editable": true,
             "label": "Масляна",
             "quantity": "3"
           },
@@ -9876,6 +9922,7 @@
             "children": [
               {
                 "value": "#8b68f375",
+                "editable": true,
                 "label": "Гальмо стоянкове у зборі",
                 "quantity": "1"
               },
@@ -10123,16 +10170,19 @@
               },
               {
                 "value": "#f2de0142",
+                "editable": true,
                 "label": "Сальник 102х72",
                 "quantity": "3"
               },
               {
                 "value": "#60d86eba",
+                "editable": true,
                 "label": "Сальник 90х72",
                 "quantity": "1"
               },
               {
                 "value": "#4a43feab",
+                "editable": true,
                 "label": "Сальник 54х80",
                 "quantity": "1"
               }
@@ -10395,11 +10445,13 @@
               },
               {
                 "value": "#13eba44e",
+                "editable": true,
                 "label": "Накладка гальмівна",
                 "quantity": "8"
               },
               {
                 "value": "#5fa5fe13",
+                "editable": true,
                 "label": "Заклепка",
                 "quantity": "64"
               },
@@ -10521,6 +10573,7 @@
               },
               {
                 "value": "#76925d71",
+                "editable": true,
                 "label": "Кр-йн гальм. циліндра прав./лев.",
                 "quantity": "2/2"
               }
@@ -11689,6 +11742,7 @@
             "children": [
               {
                 "value": "#3e6f7911",
+                "editable": true,
                 "label": "Циліндр гальмівний у зборі",
                 "quantity": "6"
               },
@@ -12447,6 +12501,7 @@
               },
               {
                 "value": "#b81d1883",
+                "editable": true,
                 "label": "Комплект шлангів пневмосистеми",
                 "quantity": "1"
               },
@@ -12467,6 +12522,7 @@
               },
               {
                 "value": "#b2e4179d",
+                "editable": true,
                 "label": "Шланг пневмосистеми КрАЗ",
                 "quantity": "6"
               },
@@ -12733,6 +12789,7 @@
               },
               {
                 "value": "#6527324c",
+                "editable": true,
                 "label": "Підігрівач передпусковий",
                 "quantity": "1"
               }
@@ -13610,11 +13667,13 @@
           },
           {
             "value": "#98946ed3",
+            "editable": true,
             "label": "Ящик акумуляторних батарей",
             "quantity": "1"
           },
           {
             "value": "#a30d09a0",
+            "editable": true,
             "label": "Кришка акумулят. ящика",
             "quantity": "1"
           }
@@ -13752,6 +13811,7 @@
               },
               {
                 "value": "#548a84d0",
+                "editable": true,
                 "label": "Управління лебідкою",
                 "quantity": "1"
               },
@@ -13807,6 +13867,7 @@
               },
               {
                 "value": "#a4f9b077",
+                "editable": true,
                 "label": "Ящик інструментальний",
                 "quantity": "1"
               }
@@ -15221,16 +15282,19 @@
               },
               {
                 "value": "#75f29877",
+                "editable": true,
                 "label": "Шарикопідшипник 303",
                 "quantity": "1"
               },
               {
                 "value": "#2af52f5e",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "1"
               },
               {
                 "value": "#e29bff54",
+                "editable": true,
                 "label": "Шарикопідшипник 160703",
                 "quantity": "2"
               }
@@ -15278,11 +15342,13 @@
               },
               {
                 "value": "#96429997",
+                "editable": true,
                 "label": "Шарикопідшипник 305",
                 "quantity": "1"
               },
               {
                 "value": "#9ec75c8a",
+                "editable": true,
                 "label": "Шарикопідшипник 205",
                 "quantity": "1"
               }
@@ -15541,6 +15607,7 @@
               },
               {
                 "value": "#f338f160",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "2"
               }
@@ -17485,6 +17552,7 @@
           },
           {
             "value": "#a1ec54eb",
+            "editable": true,
             "label": "Деталі РТІ на дв. ЯМЗ-238Л к-т",
             "quantity": "1"
           },
@@ -17837,6 +17905,7 @@
           },
           {
             "value": "#813fe64c",
+            "editable": true,
             "label": "Підшипник 170314 (50314)",
             "quantity": "1"
           },
@@ -17847,11 +17916,13 @@
           },
           {
             "value": "#6442d682",
+            "editable": true,
             "label": "Підшипник 60205 (пер. вал перед.)",
             "quantity": "1"
           },
           {
             "value": "#51bcb146",
+            "editable": true,
             "label": "Підшипник 592708",
             "quantity": "1"
           },
@@ -17862,6 +17933,7 @@
           },
           {
             "value": "#001fbd59",
+            "editable": true,
             "label": "Підшипник 50315",
             "quantity": "1"
           },
@@ -17872,16 +17944,19 @@
           },
           {
             "value": "#c16c715a",
+            "editable": true,
             "label": "Підшипник 102308",
             "quantity": "1"
           },
           {
             "value": "#5c353559",
+            "editable": true,
             "label": "Підшипник 3609",
             "quantity": "1"
           },
           {
             "value": "#d76d94d7",
+            "editable": true,
             "label": "Подшипник 64907К",
             "quantity": "1"
           },
@@ -17907,6 +17982,7 @@
           },
           {
             "value": "#41e0e3d0",
+            "editable": true,
             "label": "Масляна",
             "quantity": "3"
           },
@@ -18774,11 +18850,13 @@
           },
           {
             "value": "#1ad7e633",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "1"
           },
           {
             "value": "#a1ed8b10",
+            "editable": true,
             "label": "Сальник 90х72",
             "quantity": "1"
           },
@@ -18789,6 +18867,7 @@
           },
           {
             "value": "#ef03d550",
+            "editable": true,
             "label": "Манжета 45х65х10",
             "quantity": "1"
           },
@@ -18799,6 +18878,7 @@
           },
           {
             "value": "#cd1700ec",
+            "editable": true,
             "label": "Сальник 30х47",
             "quantity": "1"
           },
@@ -19311,26 +19391,31 @@
           },
           {
             "value": "#5f6b029b",
+            "editable": true,
             "label": "Кран колісний",
             "quantity": "7"
           },
           {
             "value": "#66669293",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "6"
           },
           {
             "value": "#88b583b8",
+            "editable": true,
             "label": "Сальник 160х130",
             "quantity": "4"
           },
           {
             "value": "#2eef83e9",
+            "editable": true,
             "label": "Накладка фрикційна",
             "quantity": "8"
           },
           {
             "value": "#283d02c2",
+            "editable": true,
             "label": "Заклепка",
             "quantity": "32"
           },
@@ -19346,6 +19431,7 @@
           },
           {
             "value": "#b515f1e4",
+            "editable": true,
             "label": "Сапун",
             "quantity": "4"
           },
@@ -19868,21 +19954,25 @@
           },
           {
             "value": "#e494ec7e",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "12"
           },
           {
             "value": "#200b4e31",
+            "editable": true,
             "label": "Сальник 160х130",
             "quantity": "4"
           },
           {
             "value": "#bff53453",
+            "editable": true,
             "label": "Накладка гальмівна",
             "quantity": "16"
           },
           {
             "value": "#5e277705",
+            "editable": true,
             "label": "Заклепка",
             "quantity": "128"
           }
@@ -21280,6 +21370,7 @@
             "children": [
               {
                 "value": "#0bf4028e",
+                "editable": true,
                 "label": "Камера гальмівна передня в зборі",
                 "quantity": "2"
               },
@@ -21437,6 +21528,7 @@
               },
               {
                 "value": "#fa0e67c6",
+                "editable": true,
                 "label": "Кран роз'єднувальний",
                 "quantity": "2"
               },
@@ -21462,16 +21554,19 @@
               },
               {
                 "value": "#fb5d40ba",
+                "editable": true,
                 "label": "Шланг гальмівний",
                 "quantity": "1"
               },
               {
                 "value": "#55a9bc6b",
+                "editable": true,
                 "label": "Шланг горного гальма",
                 "quantity": "1"
               },
               {
                 "value": "#8a42f66f",
+                "editable": true,
                 "label": "Штуцер трубки Ø4",
                 "quantity": "3"
               },
@@ -21482,6 +21577,7 @@
               },
               {
                 "value": "#0553bccf",
+                "editable": true,
                 "label": "Ремкомплект клапана з двома приводами",
                 "quantity": "2"
               },
@@ -21512,6 +21608,7 @@
               },
               {
                 "value": "#f4e26062",
+                "editable": true,
                 "label": "Кільце резинове ущільнювальне Ø22",
                 "quantity": "16"
               }
@@ -22150,16 +22247,19 @@
           },
           {
             "value": "#6fe8dc68",
+            "editable": true,
             "label": "Болти різні",
             "quantity": "44"
           },
           {
             "value": "#2fc590bb",
+            "editable": true,
             "label": "Гайки різні",
             "quantity": "44"
           },
           {
             "value": "#8b7e955e",
+            "editable": true,
             "label": "Пальці",
             "quantity": "16"
           }
@@ -22387,6 +22487,7 @@
           },
           {
             "value": "#b57d7cd2",
+            "editable": true,
             "label": "Жгути проводів різні",
             "quantity": "15"
           },
@@ -22819,6 +22920,7 @@
               },
               {
                 "value": "#d39759b2",
+                "editable": true,
                 "label": "Управління лебідкою",
                 "quantity": "1"
               },
@@ -24090,61 +24192,73 @@
               },
               {
                 "value": "#e5ddee95",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#b9451591",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#63fe7360",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#f4f0df73",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#7a287e14",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#c0cb6072",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#1abb2391",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#7d21c505",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#bea90925",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#a27e49af",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               },
               {
                 "value": "#fa0d741e",
+                "editable": true,
                 "label": "Лист 12",
                 "quantity": "2"
               },
               {
                 "value": "#c3d60129",
+                "editable": true,
                 "label": "Лист 13",
                 "quantity": "2"
               },
@@ -24207,51 +24321,61 @@
               },
               {
                 "value": "#9aeab04a",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#04e41082",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#56169499",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#e1ab5986",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#37a8b1a5",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#ac2f5eba",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#31c96b15",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#1382ef81",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#bcc8bf9b",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#dd905655",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               }
@@ -24264,6 +24388,7 @@
             "children": [
               {
                 "value": "#78b1ca32",
+                "editable": true,
                 "label": "Автошина 1300х530х533",
                 "quantity": "7"
               },
@@ -24289,6 +24414,7 @@
               },
               {
                 "value": "#8e2dbf6a",
+                "editable": true,
                 "label": "Гайка колеса",
                 "quantity": "36"
               },
@@ -24506,16 +24632,19 @@
               },
               {
                 "value": "#73ab0b25",
+                "editable": true,
                 "label": "Шарикопідшипник 303",
                 "quantity": "1"
               },
               {
                 "value": "#1a0ffd4e",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "1"
               },
               {
                 "value": "#e4e40ac5",
+                "editable": true,
                 "label": "Шарикопідшипник 160703",
                 "quantity": "2"
               }
@@ -24563,11 +24692,13 @@
               },
               {
                 "value": "#8399c41f",
+                "editable": true,
                 "label": "Шарикопідшипник 305",
                 "quantity": "1"
               },
               {
                 "value": "#eb150117",
+                "editable": true,
                 "label": "Шарикопідшипник 205",
                 "quantity": "1"
               }
@@ -24801,6 +24932,7 @@
               },
               {
                 "value": "#0b4648ef",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "2"
               }
@@ -26258,6 +26390,7 @@
               },
               {
                 "value": "#d9e86034",
+                "editable": true,
                 "label": "Р/К силового циліндра",
                 "quantity": "1"
               }
@@ -26815,6 +26948,7 @@
           },
           {
             "value": "#ea996a68",
+            "editable": true,
             "label": "Деталі РТІ на дв. ЯМЗ-238Л к-т",
             "quantity": "1"
           },
@@ -27167,6 +27301,7 @@
           },
           {
             "value": "#2d509cb7",
+            "editable": true,
             "label": "Підшипник 170314 (50314)",
             "quantity": "1"
           },
@@ -27177,11 +27312,13 @@
           },
           {
             "value": "#29a47354",
+            "editable": true,
             "label": "Підшипник 60205 (пер. вал перед.)",
             "quantity": "1"
           },
           {
             "value": "#73f12148",
+            "editable": true,
             "label": "Підшипник 592708",
             "quantity": "1"
           },
@@ -27192,6 +27329,7 @@
           },
           {
             "value": "#748238ca",
+            "editable": true,
             "label": "Підшипник 50315",
             "quantity": "1"
           },
@@ -27202,16 +27340,19 @@
           },
           {
             "value": "#616d5dd1",
+            "editable": true,
             "label": "Підшипник 102308",
             "quantity": "1"
           },
           {
             "value": "#e97515be",
+            "editable": true,
             "label": "Підшипник 3609",
             "quantity": "1"
           },
           {
             "value": "#06d26999",
+            "editable": true,
             "label": "Подшипник 64907К",
             "quantity": "1"
           },
@@ -27237,6 +27378,7 @@
           },
           {
             "value": "#f1e6fb52",
+            "editable": true,
             "label": "Масляна",
             "quantity": "3"
           },
@@ -28104,11 +28246,13 @@
           },
           {
             "value": "#2f1daa88",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "1"
           },
           {
             "value": "#35268ffa",
+            "editable": true,
             "label": "Сальник 90х72",
             "quantity": "1"
           },
@@ -28119,6 +28263,7 @@
           },
           {
             "value": "#874e8763",
+            "editable": true,
             "label": "Манжета 45х65х10",
             "quantity": "1"
           },
@@ -28129,6 +28274,7 @@
           },
           {
             "value": "#ff2d013d",
+            "editable": true,
             "label": "Сальник 30х47",
             "quantity": "1"
           },
@@ -28641,26 +28787,31 @@
           },
           {
             "value": "#6721c1ef",
+            "editable": true,
             "label": "Кран колісний",
             "quantity": "7"
           },
           {
             "value": "#6a226f58",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "6"
           },
           {
             "value": "#359302f0",
+            "editable": true,
             "label": "Сальник 160х130",
             "quantity": "4"
           },
           {
             "value": "#55c80380",
+            "editable": true,
             "label": "Накладка фрикційна",
             "quantity": "8"
           },
           {
             "value": "#450d6a96",
+            "editable": true,
             "label": "Заклепка",
             "quantity": "32"
           },
@@ -28676,6 +28827,7 @@
           },
           {
             "value": "#365fdc73",
+            "editable": true,
             "label": "Сапун",
             "quantity": "4"
           },
@@ -29198,21 +29350,25 @@
           },
           {
             "value": "#483dc2bd",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "12"
           },
           {
             "value": "#83266275",
+            "editable": true,
             "label": "Сальник 160х130",
             "quantity": "4"
           },
           {
             "value": "#b346c51f",
+            "editable": true,
             "label": "Накладка гальмівна",
             "quantity": "16"
           },
           {
             "value": "#7ace752f",
+            "editable": true,
             "label": "Заклепка",
             "quantity": "128"
           }
@@ -30610,6 +30766,7 @@
             "children": [
               {
                 "value": "#352e90b5",
+                "editable": true,
                 "label": "Камера гальмівна передня в зборі",
                 "quantity": "2"
               },
@@ -30767,6 +30924,7 @@
               },
               {
                 "value": "#49ee03bd",
+                "editable": true,
                 "label": "Кран роз'єднувальний",
                 "quantity": "2"
               },
@@ -30792,16 +30950,19 @@
               },
               {
                 "value": "#ce7deed4",
+                "editable": true,
                 "label": "Шланг гальмівний",
                 "quantity": "1"
               },
               {
                 "value": "#8757ed74",
+                "editable": true,
                 "label": "Шланг горного гальма",
                 "quantity": "1"
               },
               {
                 "value": "#39aef563",
+                "editable": true,
                 "label": "Штуцер трубки Ø4",
                 "quantity": "3"
               },
@@ -30812,6 +30973,7 @@
               },
               {
                 "value": "#b82c9a31",
+                "editable": true,
                 "label": "Ремкомплект клапана з двома приводами",
                 "quantity": "2"
               },
@@ -30842,6 +31004,7 @@
               },
               {
                 "value": "#721a8dc9",
+                "editable": true,
                 "label": "Кільце резинове ущільнювальне Ø22",
                 "quantity": "16"
               }
@@ -31737,6 +31900,7 @@
           },
           {
             "value": "#a2cede44",
+            "editable": true,
             "label": "Жгути проводів різні",
             "quantity": "15"
           },
@@ -32169,6 +32333,7 @@
               },
               {
                 "value": "#31ded44c",
+                "editable": true,
                 "label": "Управління лебідкою",
                 "quantity": "1"
               },
@@ -33440,61 +33605,73 @@
               },
               {
                 "value": "#af2ed577",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#6eeebc59",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#5ad223ba",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#441b9761",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#7f1ffd00",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#d13fadae",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#45be5bb3",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#e03f80d9",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#f1c0c520",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#5be8242b",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               },
               {
                 "value": "#3552ab35",
+                "editable": true,
                 "label": "Лист 12",
                 "quantity": "2"
               },
               {
                 "value": "#e6f195b8",
+                "editable": true,
                 "label": "Лист 13",
                 "quantity": "2"
               },
@@ -33557,51 +33734,61 @@
               },
               {
                 "value": "#8db8e708",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#728237b5",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#7277477f",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#5ad62086",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#973ee0b5",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#51706f31",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#1bb6d8ba",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#3672e61c",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#10406112",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#71a940b4",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               }
@@ -33614,6 +33801,7 @@
             "children": [
               {
                 "value": "#6c40562a",
+                "editable": true,
                 "label": "Автошина 1300х530х533",
                 "quantity": "7"
               },
@@ -33639,6 +33827,7 @@
               },
               {
                 "value": "#10174855",
+                "editable": true,
                 "label": "Гайка колеса",
                 "quantity": "36"
               },
@@ -33856,16 +34045,19 @@
               },
               {
                 "value": "#ecace190",
+                "editable": true,
                 "label": "Шарикопідшипник 303",
                 "quantity": "1"
               },
               {
                 "value": "#7dca0a74",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "1"
               },
               {
                 "value": "#fb7acfaa",
+                "editable": true,
                 "label": "Шарикопідшипник 160703",
                 "quantity": "2"
               }
@@ -33913,11 +34105,13 @@
               },
               {
                 "value": "#6d9042e8",
+                "editable": true,
                 "label": "Шарикопідшипник 305",
                 "quantity": "1"
               },
               {
                 "value": "#4d94b406",
+                "editable": true,
                 "label": "Шарикопідшипник 205",
                 "quantity": "1"
               }
@@ -34151,6 +34345,7 @@
               },
               {
                 "value": "#2716fcae",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "2"
               }
@@ -35608,6 +35803,7 @@
               },
               {
                 "value": "#ba9c0732",
+                "editable": true,
                 "label": "Р/К силового циліндра",
                 "quantity": "1"
               }
@@ -36165,6 +36361,7 @@
           },
           {
             "value": "#eadf55f2",
+            "editable": true,
             "label": "Деталі РТІ на дв. ЯМЗ-238Л к-т",
             "quantity": "1"
           },
@@ -36522,6 +36719,7 @@
           },
           {
             "value": "#d9fc3d22",
+            "editable": true,
             "label": "Підшипник 170314 (50314)",
             "quantity": "1"
           },
@@ -36532,11 +36730,13 @@
           },
           {
             "value": "#c77de00c",
+            "editable": true,
             "label": "Підшипник 60205 (перв. вал перед.)",
             "quantity": "1"
           },
           {
             "value": "#8869406a",
+            "editable": true,
             "label": "Підшипник 592708",
             "quantity": "1"
           },
@@ -36547,6 +36747,7 @@
           },
           {
             "value": "#8f508d54",
+            "editable": true,
             "label": "Підшипник 50315",
             "quantity": "1"
           },
@@ -36557,16 +36758,19 @@
           },
           {
             "value": "#948fa2ed",
+            "editable": true,
             "label": "Підшипник 102308",
             "quantity": "1"
           },
           {
             "value": "#2800cc1a",
+            "editable": true,
             "label": "Підшипник 3609",
             "quantity": "1"
           },
           {
             "value": "#3ce9c91a",
+            "editable": true,
             "label": "Підшипник 64907К",
             "quantity": "1"
           },
@@ -36592,6 +36796,7 @@
           },
           {
             "value": "#2568d194",
+            "editable": true,
             "label": "Мастильниця",
             "quantity": "3"
           },
@@ -37484,11 +37689,13 @@
           },
           {
             "value": "#e4cb80f4",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "1"
           },
           {
             "value": "#493ded2f",
+            "editable": true,
             "label": "Сальник 90х72",
             "quantity": "1"
           },
@@ -37499,6 +37706,7 @@
           },
           {
             "value": "#2e469704",
+            "editable": true,
             "label": "Манжета 45х65х10",
             "quantity": "1"
           },
@@ -37509,6 +37717,7 @@
           },
           {
             "value": "#47afc82f",
+            "editable": true,
             "label": "Сальник 30х47",
             "quantity": "1"
           },
@@ -38773,21 +38982,25 @@
           },
           {
             "value": "#36234a63",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "6"
           },
           {
             "value": "#45ce352d",
+            "editable": true,
             "label": "Сальник 160х130",
             "quantity": "2"
           },
           {
             "value": "#d15651f6",
+            "editable": true,
             "label": "Накладка гальмівна",
             "quantity": "8"
           },
           {
             "value": "#a1e41cbe",
+            "editable": true,
             "label": "Заклепка",
             "quantity": "64"
           }
@@ -40295,6 +40508,7 @@
               },
               {
                 "value": "#8fe0778b",
+                "editable": true,
                 "label": "Кран роз'єднувальний",
                 "quantity": "2"
               },
@@ -40320,16 +40534,19 @@
               },
               {
                 "value": "#ea3bde55",
+                "editable": true,
                 "label": "Шланг гальмівний",
                 "quantity": "1"
               },
               {
                 "value": "#4320cef0",
+                "editable": true,
                 "label": "Шланг гірського гальма",
                 "quantity": "1"
               },
               {
                 "value": "#80600f34",
+                "editable": true,
                 "label": "Штуцер трубки Ø4",
                 "quantity": "3"
               },
@@ -40340,6 +40557,7 @@
               },
               {
                 "value": "#9f30ea49",
+                "editable": true,
                 "label": "Ремкомплект клапана з двома приводами",
                 "quantity": "2"
               },
@@ -40370,6 +40588,7 @@
               },
               {
                 "value": "#95248543",
+                "editable": true,
                 "label": "Кільце гумове ущільнювальне Ø22",
                 "quantity": "16"
               }
@@ -40751,6 +40970,7 @@
               },
               {
                 "value": "#119f888d",
+                "editable": true,
                 "label": "Підігрівач предпусковий",
                 "quantity": "1"
               }
@@ -42077,21 +42297,25 @@
               },
               {
                 "value": "#87620d79",
+                "editable": true,
                 "label": "Щиток підігрівача «Веба-сто»",
                 "quantity": "1"
               },
               {
                 "value": "#09291aa1",
+                "editable": true,
                 "label": "Єднання контактних панелей управління підігрівача «Вебасто» DBW-300",
                 "quantity": "4"
               },
               {
                 "value": "#5b765a4c",
+                "editable": true,
                 "label": "Опалювальний прилад підігрівача «Вебасто» DBW-300",
                 "quantity": "1"
               },
               {
                 "value": "#1cf5b7d5",
+                "editable": true,
                 "label": "Єднальні контакти підігрівача",
                 "quantity": "1"
               },
@@ -42117,11 +42341,13 @@
               },
               {
                 "value": "#585ee2a8",
+                "editable": true,
                 "label": "Датчик засміченості повітряного фільтру ДСФ-45",
                 "quantity": "1"
               },
               {
                 "value": "#104a2c64",
+                "editable": true,
                 "label": "Датчик забрудненості масляного фільтру",
                 "quantity": "1"
               },
@@ -42522,6 +42748,7 @@
               },
               {
                 "value": "#f9e7a386",
+                "editable": true,
                 "label": "Роз’єм реле демультиплікатора",
                 "quantity": "1"
               },
@@ -42557,16 +42784,19 @@
               },
               {
                 "value": "#39c7067a",
+                "editable": true,
                 "label": "Електродвигун додаткового обігрівачу",
                 "quantity": "1"
               },
               {
                 "value": "#86fd1206",
+                "editable": true,
                 "label": "Електродвигун ЕПБ",
                 "quantity": "1"
               },
               {
                 "value": "#e80d180d",
+                "editable": true,
                 "label": "Електродвигун ЕПБ",
                 "quantity": "1"
               },
@@ -42752,26 +42982,31 @@
               },
               {
                 "value": "#5fd12bff",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "7"
               },
               {
                 "value": "#72ecd2c1",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "7"
               },
               {
                 "value": "#80b8ee51",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "2"
               },
               {
                 "value": "#e5a44179",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "10"
               },
               {
                 "value": "#7012f9c3",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "6"
               },
@@ -44295,61 +44530,73 @@
               },
               {
                 "value": "#d0ec9c11",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#81ad7028",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#96788810",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#1a97a6db",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#4c387f63",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#6d571199",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#08d214a3",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#3e656df6",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#0190bcdb",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#b4178772",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               },
               {
                 "value": "#e4108f51",
+                "editable": true,
                 "label": "Лист 12",
                 "quantity": "2"
               },
               {
                 "value": "#293bb81f",
+                "editable": true,
                 "label": "Лист 13",
                 "quantity": "2"
               },
@@ -44412,51 +44659,61 @@
               },
               {
                 "value": "#b8cedbd9",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#2b35c3ea",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#8cd70dfb",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#9fc373df",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#579adfea",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#a3a41b8f",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#5194d670",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#4876d9b2",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#dc97e99d",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#8e8207a7",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               }
@@ -44469,6 +44726,7 @@
             "children": [
               {
                 "value": "#f4c01467",
+                "editable": true,
                 "label": "Автошина 1300х530х533",
                 "quantity": "5"
               },
@@ -44494,6 +44752,7 @@
               },
               {
                 "value": "#1bf7f010",
+                "editable": true,
                 "label": "Гайка колеса",
                 "quantity": "24"
               },
@@ -45378,16 +45637,19 @@
               },
               {
                 "value": "#8f0867db",
+                "editable": true,
                 "label": "Шарикопідшипник 303",
                 "quantity": "1"
               },
               {
                 "value": "#2a077751",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "1"
               },
               {
                 "value": "#e0b64d72",
+                "editable": true,
                 "label": "Шарикопідшипник 160703",
                 "quantity": "2"
               }
@@ -45435,11 +45697,13 @@
               },
               {
                 "value": "#f092d17c",
+                "editable": true,
                 "label": "Шарикопідшипник 305",
                 "quantity": "1"
               },
               {
                 "value": "#7f682fc4",
+                "editable": true,
                 "label": "Шарикопідшипник 205",
                 "quantity": "1"
               }
@@ -45673,6 +45937,7 @@
               },
               {
                 "value": "#dfb933fc",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "2"
               }
@@ -48022,6 +48287,7 @@
           },
           {
             "value": "#f7b668ba",
+            "editable": true,
             "label": "Деталі РТІ на дв. ЯМЗ-238Л к-т",
             "quantity": "1"
           },
@@ -48379,6 +48645,7 @@
           },
           {
             "value": "#c3b83e42",
+            "editable": true,
             "label": "Підшипник 170314 (50314)",
             "quantity": "1"
           },
@@ -48389,11 +48656,13 @@
           },
           {
             "value": "#aa52aa3a",
+            "editable": true,
             "label": "Підшипник 60205 (перв. вал перед.)",
             "quantity": "1"
           },
           {
             "value": "#6fe702ef",
+            "editable": true,
             "label": "Підшипник 592708",
             "quantity": "1"
           },
@@ -48404,6 +48673,7 @@
           },
           {
             "value": "#9e476918",
+            "editable": true,
             "label": "Підшипник 50315",
             "quantity": "1"
           },
@@ -48414,16 +48684,19 @@
           },
           {
             "value": "#bc6a114b",
+            "editable": true,
             "label": "Підшипник 102308",
             "quantity": "1"
           },
           {
             "value": "#78345e2a",
+            "editable": true,
             "label": "Підшипник 3609",
             "quantity": "1"
           },
           {
             "value": "#81f71734",
+            "editable": true,
             "label": "Підшипник 64907К",
             "quantity": "1"
           },
@@ -48449,6 +48722,7 @@
           },
           {
             "value": "#e8898ccd",
+            "editable": true,
             "label": "Мастильниця",
             "quantity": "3"
           },
@@ -49341,11 +49615,13 @@
           },
           {
             "value": "#28bbefd2",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "1"
           },
           {
             "value": "#39d9b7d1",
+            "editable": true,
             "label": "Сальник 90х72",
             "quantity": "1"
           },
@@ -49356,6 +49632,7 @@
           },
           {
             "value": "#9413b494",
+            "editable": true,
             "label": "Манжета 45х65х10",
             "quantity": "1"
           },
@@ -49366,6 +49643,7 @@
           },
           {
             "value": "#bc26df33",
+            "editable": true,
             "label": "Сальник 30х47",
             "quantity": "1"
           },
@@ -50640,21 +50918,25 @@
           },
           {
             "value": "#fd5e4d23",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "12"
           },
           {
             "value": "#fea4d239",
+            "editable": true,
             "label": "Сальник 160х130",
             "quantity": "4"
           },
           {
             "value": "#af654908",
+            "editable": true,
             "label": "Накладка гальмівна",
             "quantity": "16"
           },
           {
             "value": "#a9943dc9",
+            "editable": true,
             "label": "Заклепка",
             "quantity": "128"
           }
@@ -52052,6 +52334,7 @@
             "children": [
               {
                 "value": "#891806df",
+                "editable": true,
                 "label": "Камера гальмівна передня у зборі",
                 "quantity": "2"
               },
@@ -52209,6 +52492,7 @@
               },
               {
                 "value": "#1b40eb05",
+                "editable": true,
                 "label": "Кран роз'єднувальний",
                 "quantity": "2"
               },
@@ -52234,16 +52518,19 @@
               },
               {
                 "value": "#1d624481",
+                "editable": true,
                 "label": "Шланг гальмівний",
                 "quantity": "1"
               },
               {
                 "value": "#de5d3407",
+                "editable": true,
                 "label": "Шланг гірського гальма",
                 "quantity": "1"
               },
               {
                 "value": "#f3bf58e2",
+                "editable": true,
                 "label": "Штуцер трубки Ø4",
                 "quantity": "3"
               },
@@ -52254,6 +52541,7 @@
               },
               {
                 "value": "#1265805b",
+                "editable": true,
                 "label": "Ремкомплект клапана з двома приводами",
                 "quantity": "2"
               },
@@ -52284,6 +52572,7 @@
               },
               {
                 "value": "#42f90ad1",
+                "editable": true,
                 "label": "Кільце гумове ущільнювальне Ø22",
                 "quantity": "16"
               }
@@ -52665,6 +52954,7 @@
               },
               {
                 "value": "#0ee2a5e8",
+                "editable": true,
                 "label": "Підігрівач предпусковий",
                 "quantity": "1"
               }
@@ -53991,21 +54281,25 @@
               },
               {
                 "value": "#32fa929e",
+                "editable": true,
                 "label": "Щиток підігрівача «Веба-сто»",
                 "quantity": "1"
               },
               {
                 "value": "#a62b2f2a",
+                "editable": true,
                 "label": "Єднання контактних панелей управління підігрівача «Вебасто» DBW-300",
                 "quantity": "4"
               },
               {
                 "value": "#cf27e7a7",
+                "editable": true,
                 "label": "Опалювальний прилад підігрівача «Вебасто» DBW-300",
                 "quantity": "1"
               },
               {
                 "value": "#731e8ea4",
+                "editable": true,
                 "label": "Єднальні контакти підігрівача",
                 "quantity": "1"
               },
@@ -54031,11 +54325,13 @@
               },
               {
                 "value": "#2c9ed0ed",
+                "editable": true,
                 "label": "Датчик засміченості повітряного фільтру ДСФ-45",
                 "quantity": "1"
               },
               {
                 "value": "#8d2962ea",
+                "editable": true,
                 "label": "Датчик забрудненості масляного фільтру",
                 "quantity": "1"
               },
@@ -54436,6 +54732,7 @@
               },
               {
                 "value": "#40fe6b64",
+                "editable": true,
                 "label": "Роз’єм реле демультиплікатора",
                 "quantity": "1"
               },
@@ -54471,16 +54768,19 @@
               },
               {
                 "value": "#b272b009",
+                "editable": true,
                 "label": "Електродвигун додаткового обігрівачу",
                 "quantity": "1"
               },
               {
                 "value": "#12d1cb88",
+                "editable": true,
                 "label": "Електродвигун ЕПБ",
                 "quantity": "1"
               },
               {
                 "value": "#78729cb7",
+                "editable": true,
                 "label": "Електродвигун ЕПБ",
                 "quantity": "1"
               },
@@ -54666,26 +54966,31 @@
               },
               {
                 "value": "#6453eaf0",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "7"
               },
               {
                 "value": "#cc6e7ca2",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "7"
               },
               {
                 "value": "#d83ac933",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "2"
               },
               {
                 "value": "#9c1d2a61",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "10"
               },
               {
                 "value": "#de19a69a",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "6"
               },
@@ -56348,61 +56653,73 @@
               },
               {
                 "value": "#0967959f",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#cc9d5518",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#066955ef",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#6a1654db",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#1b890c0f",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#9930e917",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#9536ff75",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#9b0cdc58",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#9e73ddd6",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#81318059",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               },
               {
                 "value": "#2f1e5520",
+                "editable": true,
                 "label": "Лист 12",
                 "quantity": "2"
               },
               {
                 "value": "#3ecb657a",
+                "editable": true,
                 "label": "Лист 13",
                 "quantity": "2"
               },
@@ -56465,51 +56782,61 @@
               },
               {
                 "value": "#36a8799f",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#90bdef6b",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#4922d082",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#dc2c792c",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#965dfc55",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#963491b4",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#8adb0658",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#700ae3cd",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#ec082a73",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#5fe237a8",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               }
@@ -56522,6 +56849,7 @@
             "children": [
               {
                 "value": "#b8e3cce8",
+                "editable": true,
                 "label": "Автошина 1300х530х533",
                 "quantity": "7"
               },
@@ -56547,6 +56875,7 @@
               },
               {
                 "value": "#9cfdcf04",
+                "editable": true,
                 "label": "Гайка колеса",
                 "quantity": "36"
               },
@@ -57431,16 +57760,19 @@
               },
               {
                 "value": "#72cc2af1",
+                "editable": true,
                 "label": "Шарикопідшипник 303",
                 "quantity": "1"
               },
               {
                 "value": "#ea0f1348",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "1"
               },
               {
                 "value": "#dfadc5a5",
+                "editable": true,
                 "label": "Шарикопідшипник 160703",
                 "quantity": "2"
               }
@@ -57488,11 +57820,13 @@
               },
               {
                 "value": "#5659cc35",
+                "editable": true,
                 "label": "Шарикопідшипник 305",
                 "quantity": "1"
               },
               {
                 "value": "#8cf6c221",
+                "editable": true,
                 "label": "Шарикопідшипник 205",
                 "quantity": "1"
               }
@@ -57726,6 +58060,7 @@
               },
               {
                 "value": "#2fbb2aa7",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "2"
               }
@@ -59727,6 +60062,7 @@
               },
               {
                 "value": "#44e97d1e",
+                "editable": true,
                 "label": "Гільзо-поршнева",
                 "quantity": "6"
               },
@@ -63855,11 +64191,13 @@
           },
           {
             "value": "#0a3272de",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "1"
           },
           {
             "value": "#ade591f5",
+            "editable": true,
             "label": "Сальник 90х72",
             "quantity": "1"
           },
@@ -63870,6 +64208,7 @@
           },
           {
             "value": "#676de7dd",
+            "editable": true,
             "label": "Манжета 45х65х10",
             "quantity": "1"
           },
@@ -63880,6 +64219,7 @@
           },
           {
             "value": "#f47d75c7",
+            "editable": true,
             "label": "Сальник 30х47",
             "quantity": "1"
           },
@@ -65154,21 +65494,25 @@
           },
           {
             "value": "#c0b64131",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "12"
           },
           {
             "value": "#8b073c43",
+            "editable": true,
             "label": "Сальник 160х130",
             "quantity": "4"
           },
           {
             "value": "#c94aa45c",
+            "editable": true,
             "label": "Накладка гальмівна",
             "quantity": "16"
           },
           {
             "value": "#782f9c98",
+            "editable": true,
             "label": "Заклепка",
             "quantity": "128"
           }
@@ -66566,6 +66910,7 @@
             "children": [
               {
                 "value": "#5783439a",
+                "editable": true,
                 "label": "Камера гальмівна передня у зборі",
                 "quantity": "2"
               },
@@ -66723,6 +67068,7 @@
               },
               {
                 "value": "#329746e9",
+                "editable": true,
                 "label": "Кран роз'єднувальний",
                 "quantity": "2"
               },
@@ -66748,16 +67094,19 @@
               },
               {
                 "value": "#fbb80f8f",
+                "editable": true,
                 "label": "Шланг гальмівний",
                 "quantity": "1"
               },
               {
                 "value": "#a652ca4b",
+                "editable": true,
                 "label": "Шланг гірського гальма",
                 "quantity": "1"
               },
               {
                 "value": "#969d555a",
+                "editable": true,
                 "label": "Штуцер трубки Ø4",
                 "quantity": "3"
               },
@@ -66768,6 +67117,7 @@
               },
               {
                 "value": "#da66ac59",
+                "editable": true,
                 "label": "Ремкомплект клапана з двома приводами",
                 "quantity": "2"
               },
@@ -66798,6 +67148,7 @@
               },
               {
                 "value": "#062225a1",
+                "editable": true,
                 "label": "Кільце гумове ущільнювальне Ø22",
                 "quantity": "16"
               }
@@ -67179,6 +67530,7 @@
               },
               {
                 "value": "#4ac5cdbb",
+                "editable": true,
                 "label": "Підігрівач предпусковий",
                 "quantity": "1"
               }
@@ -68505,21 +68857,25 @@
               },
               {
                 "value": "#f8042df0",
+                "editable": true,
                 "label": "Щиток підігрівача «Веба-сто»",
                 "quantity": "1"
               },
               {
                 "value": "#6c5c02e8",
+                "editable": true,
                 "label": "Єднання контактних панелей управління підігрівача «Вебасто» DBW-300",
                 "quantity": "4"
               },
               {
                 "value": "#f4b6cec9",
+                "editable": true,
                 "label": "Опалювальний прилад підігрівача «Вебасто» DBW-300",
                 "quantity": "1"
               },
               {
                 "value": "#6004beea",
+                "editable": true,
                 "label": "Єднальні контакти підігрівача",
                 "quantity": "1"
               },
@@ -68545,11 +68901,13 @@
               },
               {
                 "value": "#c4bc4c4e",
+                "editable": true,
                 "label": "Датчик засміченості повітряного фільтру ДСФ-45",
                 "quantity": "1"
               },
               {
                 "value": "#75e60b29",
+                "editable": true,
                 "label": "Датчик забрудненості масляного фільтру",
                 "quantity": "1"
               },
@@ -68950,6 +69308,7 @@
               },
               {
                 "value": "#fbd6c04c",
+                "editable": true,
                 "label": "Роз’єм реле демультиплікатора",
                 "quantity": "1"
               },
@@ -68985,16 +69344,19 @@
               },
               {
                 "value": "#2828a131",
+                "editable": true,
                 "label": "Електродвигун додаткового обігрівачу",
                 "quantity": "1"
               },
               {
                 "value": "#4ebb7cb2",
+                "editable": true,
                 "label": "Електродвигун ЕПБ",
                 "quantity": "1"
               },
               {
                 "value": "#3c610ab7",
+                "editable": true,
                 "label": "Електродвигун ЕПБ",
                 "quantity": "1"
               },
@@ -69180,26 +69542,31 @@
               },
               {
                 "value": "#636491ae",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "7"
               },
               {
                 "value": "#929f403c",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "7"
               },
               {
                 "value": "#c771fe47",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "2"
               },
               {
                 "value": "#396bc195",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "10"
               },
               {
                 "value": "#cf911186",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "6"
               },
@@ -70862,61 +71229,73 @@
               },
               {
                 "value": "#439f2a2e",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#72c4b913",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#6099285a",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#889efaa4",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#04f62739",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#5b596117",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#fc6095d8",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#5dc22645",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#b40a719c",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#93a06d33",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               },
               {
                 "value": "#884f7347",
+                "editable": true,
                 "label": "Лист 12",
                 "quantity": "2"
               },
               {
                 "value": "#f2b7487f",
+                "editable": true,
                 "label": "Лист 13",
                 "quantity": "2"
               },
@@ -70979,51 +71358,61 @@
               },
               {
                 "value": "#d933e6e0",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#64388c89",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#eed98980",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#9ec3b6c9",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#4249994f",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#d7dc764c",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#265a87f2",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#6fe7a524",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#e6f8347a",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#2e487415",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               }
@@ -71036,6 +71425,7 @@
             "children": [
               {
                 "value": "#01d39af4",
+                "editable": true,
                 "label": "Автошина 1300х530х533",
                 "quantity": "7"
               },
@@ -71061,6 +71451,7 @@
               },
               {
                 "value": "#0289178d",
+                "editable": true,
                 "label": "Гайка колеса",
                 "quantity": "36"
               },
@@ -71945,16 +72336,19 @@
               },
               {
                 "value": "#cba7e619",
+                "editable": true,
                 "label": "Шарикопідшипник 303",
                 "quantity": "1"
               },
               {
                 "value": "#83a091a2",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "1"
               },
               {
                 "value": "#e18c60ab",
+                "editable": true,
                 "label": "Шарикопідшипник 160703",
                 "quantity": "2"
               }
@@ -72002,11 +72396,13 @@
               },
               {
                 "value": "#13748a80",
+                "editable": true,
                 "label": "Шарикопідшипник 305",
                 "quantity": "1"
               },
               {
                 "value": "#7e30d250",
+                "editable": true,
                 "label": "Шарикопідшипник 205",
                 "quantity": "1"
               }
@@ -72240,6 +72636,7 @@
               },
               {
                 "value": "#4a28170f",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "2"
               }
@@ -74589,6 +74986,7 @@
           },
           {
             "value": "#d5cc1e60",
+            "editable": true,
             "label": "Деталі РТІ на дв. ЯМЗ-238Л к-т",
             "quantity": "1"
           },
@@ -74946,6 +75344,7 @@
           },
           {
             "value": "#bd234cf8",
+            "editable": true,
             "label": "Підшипник 170314 (50314)",
             "quantity": "1"
           },
@@ -74956,11 +75355,13 @@
           },
           {
             "value": "#b4896975",
+            "editable": true,
             "label": "Підшипник 60205 (перв. вал перед.)",
             "quantity": "1"
           },
           {
             "value": "#4bdeef80",
+            "editable": true,
             "label": "Підшипник 592708",
             "quantity": "1"
           },
@@ -74971,6 +75372,7 @@
           },
           {
             "value": "#9ef31290",
+            "editable": true,
             "label": "Підшипник 50315",
             "quantity": "1"
           },
@@ -74981,16 +75383,19 @@
           },
           {
             "value": "#c6214a2f",
+            "editable": true,
             "label": "Підшипник 102308",
             "quantity": "1"
           },
           {
             "value": "#9495cb5d",
+            "editable": true,
             "label": "Підшипник 3609",
             "quantity": "1"
           },
           {
             "value": "#69c31308",
+            "editable": true,
             "label": "Підшипник 64907К",
             "quantity": "1"
           },
@@ -75016,6 +75421,7 @@
           },
           {
             "value": "#62baa5d3",
+            "editable": true,
             "label": "Мастильниця",
             "quantity": "3"
           },
@@ -75908,11 +76314,13 @@
           },
           {
             "value": "#18b48719",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "1"
           },
           {
             "value": "#fe83ccf5",
+            "editable": true,
             "label": "Сальник 90х72",
             "quantity": "1"
           },
@@ -75923,6 +76331,7 @@
           },
           {
             "value": "#21004d59",
+            "editable": true,
             "label": "Манжета 45х65х10",
             "quantity": "1"
           },
@@ -75933,6 +76342,7 @@
           },
           {
             "value": "#05d857b7",
+            "editable": true,
             "label": "Сальник 30х47",
             "quantity": "1"
           },
@@ -77207,21 +77617,25 @@
           },
           {
             "value": "#124f50bb",
+            "editable": true,
             "label": "Сальник 102х75",
             "quantity": "12"
           },
           {
             "value": "#c3ca1d28",
+            "editable": true,
             "label": "Сальник 160х130",
             "quantity": "4"
           },
           {
             "value": "#52047e86",
+            "editable": true,
             "label": "Накладка гальмівна",
             "quantity": "16"
           },
           {
             "value": "#cec11128",
+            "editable": true,
             "label": "Заклепка",
             "quantity": "128"
           }
@@ -78619,6 +79033,7 @@
             "children": [
               {
                 "value": "#f2a3f079",
+                "editable": true,
                 "label": "Камера гальмівна передня у зборі",
                 "quantity": "2"
               },
@@ -78776,6 +79191,7 @@
               },
               {
                 "value": "#edd6d0ae",
+                "editable": true,
                 "label": "Кран роз'єднувальний",
                 "quantity": "2"
               },
@@ -78801,16 +79217,19 @@
               },
               {
                 "value": "#8c342b9d",
+                "editable": true,
                 "label": "Шланг гальмівний",
                 "quantity": "1"
               },
               {
                 "value": "#756a03ca",
+                "editable": true,
                 "label": "Шланг гірського гальма",
                 "quantity": "1"
               },
               {
                 "value": "#26666b52",
+                "editable": true,
                 "label": "Штуцер трубки Ø4",
                 "quantity": "3"
               },
@@ -78821,6 +79240,7 @@
               },
               {
                 "value": "#0e0730c1",
+                "editable": true,
                 "label": "Ремкомплект клапана з двома приводами",
                 "quantity": "2"
               },
@@ -78851,6 +79271,7 @@
               },
               {
                 "value": "#bb310dc9",
+                "editable": true,
                 "label": "Кільце гумове ущільнювальне Ø22",
                 "quantity": "16"
               }
@@ -79232,6 +79653,7 @@
               },
               {
                 "value": "#f1e03dff",
+                "editable": true,
                 "label": "Підігрівач предпусковий",
                 "quantity": "1"
               }
@@ -80548,21 +80970,25 @@
               },
               {
                 "value": "#886dd8f3",
+                "editable": true,
                 "label": "Щиток підігрівача «Веба-сто»",
                 "quantity": "1"
               },
               {
                 "value": "#c0e3145c",
+                "editable": true,
                 "label": "Єднання контактних панелей управління підігрівача «Вебасто» DBW-300",
                 "quantity": "4"
               },
               {
                 "value": "#8da8d702",
+                "editable": true,
                 "label": "Опалювальний прилад підігрівача «Вебасто» DBW-300",
                 "quantity": "1"
               },
               {
                 "value": "#62cd01be",
+                "editable": true,
                 "label": "Єднальні контакти підігрівача",
                 "quantity": "1"
               },
@@ -80588,11 +81014,13 @@
               },
               {
                 "value": "#711d984c",
+                "editable": true,
                 "label": "Датчик засміченості повітряного фільтру ДСФ-45",
                 "quantity": "1"
               },
               {
                 "value": "#8038e8fd",
+                "editable": true,
                 "label": "Датчик забрудненості масляного фільтру",
                 "quantity": "1"
               },
@@ -80993,6 +81421,7 @@
               },
               {
                 "value": "#e0b03e53",
+                "editable": true,
                 "label": "Роз’єм реле демультиплікатора",
                 "quantity": "1"
               },
@@ -81028,16 +81457,19 @@
               },
               {
                 "value": "#03055445",
+                "editable": true,
                 "label": "Електродвигун додаткового обігрівачу",
                 "quantity": "1"
               },
               {
                 "value": "#08a682b1",
+                "editable": true,
                 "label": "Електродвигун ЕПБ",
                 "quantity": "1"
               },
               {
                 "value": "#47d5c85f",
+                "editable": true,
                 "label": "Електродвигун ЕПБ",
                 "quantity": "1"
               },
@@ -81223,26 +81655,31 @@
               },
               {
                 "value": "#fa95269b",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "7"
               },
               {
                 "value": "#8da21daa",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "7"
               },
               {
                 "value": "#736412a8",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "2"
               },
               {
                 "value": "#76c7dcfe",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "10"
               },
               {
                 "value": "#20991ce1",
+                "editable": true,
                 "label": "З’єднання контактні",
                 "quantity": "6"
               },
@@ -82905,61 +83342,73 @@
               },
               {
                 "value": "#2608dda8",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#ac352452",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#26211244",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#369b4a11",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#fec23bae",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#d69fcfea",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#8535446a",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#0dc3ed28",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#af0bbbd8",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#a06c6e39",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               },
               {
                 "value": "#7fb63e3f",
+                "editable": true,
                 "label": "Лист 12",
                 "quantity": "2"
               },
               {
                 "value": "#f69b77b5",
+                "editable": true,
                 "label": "Лист 13",
                 "quantity": "2"
               },
@@ -83022,51 +83471,61 @@
               },
               {
                 "value": "#6fe66907",
+                "editable": true,
                 "label": "Лист 2",
                 "quantity": "2"
               },
               {
                 "value": "#7a5d0b48",
+                "editable": true,
                 "label": "Лист 3",
                 "quantity": "2"
               },
               {
                 "value": "#8230368d",
+                "editable": true,
                 "label": "Лист 4",
                 "quantity": "2"
               },
               {
                 "value": "#aa3be529",
+                "editable": true,
                 "label": "Лист 5",
                 "quantity": "2"
               },
               {
                 "value": "#5fed14bd",
+                "editable": true,
                 "label": "Лист 6",
                 "quantity": "2"
               },
               {
                 "value": "#592581fd",
+                "editable": true,
                 "label": "Лист 7",
                 "quantity": "2"
               },
               {
                 "value": "#a2507141",
+                "editable": true,
                 "label": "Лист 8",
                 "quantity": "2"
               },
               {
                 "value": "#84333a54",
+                "editable": true,
                 "label": "Лист 9",
                 "quantity": "2"
               },
               {
                 "value": "#f812c85b",
+                "editable": true,
                 "label": "Лист 10",
                 "quantity": "2"
               },
               {
                 "value": "#dc9c38e7",
+                "editable": true,
                 "label": "Лист 11",
                 "quantity": "2"
               }
@@ -83079,6 +83538,7 @@
             "children": [
               {
                 "value": "#cb5d5bd8",
+                "editable": true,
                 "label": "Автошина 1300х530х533",
                 "quantity": "7"
               },
@@ -83104,6 +83564,7 @@
               },
               {
                 "value": "#dae5f153",
+                "editable": true,
                 "label": "Гайка колеса",
                 "quantity": "36"
               },
@@ -83988,16 +84449,19 @@
               },
               {
                 "value": "#791f68ea",
+                "editable": true,
                 "label": "Шарикопідшипник 303",
                 "quantity": "1"
               },
               {
                 "value": "#c5d687cd",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "1"
               },
               {
                 "value": "#4cd84b87",
+                "editable": true,
                 "label": "Шарикопідшипник 160703",
                 "quantity": "2"
               }
@@ -84045,11 +84509,13 @@
               },
               {
                 "value": "#7f5e3331",
+                "editable": true,
                 "label": "Шарикопідшипник 305",
                 "quantity": "1"
               },
               {
                 "value": "#c43f5c99",
+                "editable": true,
                 "label": "Шарикопідшипник 205",
                 "quantity": "1"
               }
@@ -84283,6 +84749,7 @@
               },
               {
                 "value": "#e2b8ce95",
+                "editable": true,
                 "label": "Шарикопідшипник 203",
                 "quantity": "2"
               }
