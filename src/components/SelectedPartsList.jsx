@@ -14,11 +14,6 @@ import Button from "@mui/material/Button";
 import {Edit} from "@mui/icons-material";
 import {confirmable, createConfirmation} from "react-confirm";
 import ConfirmationDialog from "./ConfirmationDialog.jsx";
-import {
-    getFinalPartValue,
-    hasSelectedSizeChoice,
-    hasSizeChoices
-} from "../utils/partValue.js";
 
 const showDeleteConfirmation = createConfirmation(confirmable(ConfirmationDialog));
 
@@ -79,11 +74,9 @@ function SelectedPartsList({
                     const node = nodeByValue.get(value);
                     const label = node?.label ?? value.split('#')[0];
                     const flags = itemFlags[value] ?? {replace: 0, repair: 0, missing: 0};
-                    const isSizeMissing = hasSizeChoices(node)
-                        && !hasSelectedSizeChoice(node, flags.sizeValue);
-                    const displayedValue = isSizeMissing
-                        ? 'Оберіть розмір'
-                        : getFinalPartValue(node, value, flags);
+                    const displayedValue = node?.editable === true
+                        ? flags.value ?? value.split('#')[0]
+                        : value.split('#')[0];
 
                     return (
                         <ListItem
@@ -111,10 +104,7 @@ function SelectedPartsList({
                                 secondary={displayedValue}
                                 sx={{flex: 1, my: 0}}
                                 primaryTypographyProps={{lineHeight: 1.3}}
-                                secondaryTypographyProps={{
-                                    lineHeight: 1.3,
-                                    color: isSizeMissing ? 'error' : undefined,
-                                }}
+                                secondaryTypographyProps={{lineHeight: 1.3}}
                             />
                             <Stack
                                 direction="row"
