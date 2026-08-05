@@ -1,7 +1,7 @@
-import {getVehiclesCatalog} from "./generated.ts";
+import {getVehicles} from "./generated/charzAPI.ts";
 
-export async function getVehicles({signal} = {}) {
-    const {data: response} = await getVehiclesCatalog({signal});
+export async function getVehiclesCatalog({signal} = {}) {
+    const {data: response} = await getVehicles({signal});
 
     if (!Array.isArray(response)) {
         throw new Error('The API returned an invalid vehicles payload');

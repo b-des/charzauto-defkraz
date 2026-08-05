@@ -18,10 +18,11 @@ import SelectedPartsList from "./components/SelectedPartsList.jsx";
 import VehicleChangeConfirmDialog from "./components/VehicleChangeConfirmDialog.jsx";
 import PartDetailsDialog from "./components/PartDetailsDialog.jsx";
 import RestoreOrderDialog from "./components/RestoreOrderDialog.jsx";
-import {useVehicles} from "./hooks/useVehicles.js";
 import {sendDefect} from "./api/orderApi.js";
 import {ArrowCircleDown} from "@mui/icons-material";
 import PullToRefresh from "react-simple-pull-to-refresh";
+import {useVehicles} from "./hooks/useVehicles.js";
+
 
 const STORAGE_KEY_PREFIX = 'defkraz_order_';
 const DRAFT_STORAGE_KEY = `${STORAGE_KEY_PREFIX}draft`;
@@ -75,6 +76,8 @@ function VehicleRepairComponent() {
     const [submitNotification, setSubmitNotification] = useState(null);
     const [showParameterValidation, setShowParameterValidation] = useState(false);
     const orderNumberDebounceRef = useRef(null);
+
+    const [isErrorDismissed, setIsErrorDismissed] = useState(false);
 
     const selectedVehicle = vehicle || vehicles[0]?.value || '';
     const parameterErrors = {
@@ -283,8 +286,10 @@ function VehicleRepairComponent() {
     }, [checked, orderNumber, selectedVehicle, chassisNumber, engineNumber, itemFlags, nodeByValue, hasParameterErrors]);
 
     const filteredNodes = useMemo(() => {
-        const nodeMatchesSearchString = ({label}) => (
-            label.toLocaleLowerCase().indexOf(filterText.toLocaleLowerCase()) > -1
+        let searchString = filterText.trim().toLocaleLowerCase();
+        const nodeMatchesSearchString = ({label, value}) => (
+            label.toLocaleLowerCase().indexOf(searchString) > -1 ||
+            value.toLocaleLowerCase().indexOf(searchString) > -1
         );
 
         const filterNodes = (filtered, node) => {
@@ -328,110 +333,113 @@ function VehicleRepairComponent() {
 
     return (
         <PullToRefresh onRefresh={handleRefresh}>
-        <div className="filter-container">
-            <Grid container spacing={1} sx={{height: '100%', flexDirection: 'column', flexWrap: 'nowrap', minHeight: 0}}>
-                {vehiclesLoading && (
-                    <Grid size={12}>
-                        <CircularProgress size={24} aria-label="Завантаження автомобілів"/>
-                    </Grid>
-                )}
-                {vehiclesError && (
-                    <Grid size={12}>
-                        <Alert severity="error" onClose={() => {}}>{vehiclesError}</Alert>
-                    </Grid>
-                )}
-                <Accordion color="primary" sx={{'&.Mui-expanded': {margin: 0}}}>
-                    <AccordionSummary
-                        color="primary"
-                        expandIcon={<ArrowCircleDown />}
-                        aria-controls={`panel1-content`}
-                        id={`panel1-header`}
-                    >
-                        <Typography component="span">Службова інформація</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <VehicleParametersBar
-                            vehicles={vehicles}
-                            vehicle={selectedVehicle}
-                            onVehicleChange={onVehicleChange}
-                            orderNumber={orderNumber}
-                            orderNumberOptions={orderNumberOptions}
-                            onOrderNumberChange={onOrderNumberChange}
-                            chassisNumber={chassisNumber}
-                            onChassisNumberChange={(e) => setChassisNumber(e.target.value)}
-                            engineNumber={engineNumber}
-                            onEngineNumberChange={(e) => setEngineNumber(e.target.value)}
-                            parameterErrors={showParameterValidation ? parameterErrors : {}}
-                        />
-                        <Grid size={12} id={"filter-grid"}>
-                            <PartsFilter
-                                filterText={filterText}
-                                onFilterChange={onFilterChange}
-                                onClear={() => setFilterText('')}
+            <div className="filter-container">
+                <Grid container spacing={1}
+                      sx={{height: '100%', flexDirection: 'column', flexWrap: 'nowrap', minHeight: 0}}>
+                    {vehiclesLoading && (
+                        <Grid size={12}>
+                            <CircularProgress size={24} aria-label="Завантаження автомобілів"/>
+                        </Grid>
+                    )}
+                    {vehiclesError && !isErrorDismissed && (
+                        <Grid size={12}>
+                            <Alert severity="error" onClose={() => setIsErrorDismissed(true)}>{vehiclesError}</Alert>
+                        </Grid>
+                    )}
+                    <Accordion color="primary" sx={{'&.Mui-expanded': {margin: 0}}}>
+                        <AccordionSummary
+                            color="primary"
+                            expandIcon={<ArrowCircleDown/>}
+                            aria-controls={`panel1-content`}
+                            id={`panel1-header`}
+                        >
+                            <Typography component="span">Службова інформація</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <VehicleParametersBar
+                                vehicles={vehicles}
+                                vehicle={selectedVehicle}
+                                onVehicleChange={onVehicleChange}
+                                orderNumber={orderNumber}
+                                orderNumberOptions={orderNumberOptions}
+                                onOrderNumberChange={onOrderNumberChange}
+                                chassisNumber={chassisNumber}
+                                onChassisNumberChange={(e) => setChassisNumber(e.target.value)}
+                                engineNumber={engineNumber}
+                                onEngineNumberChange={(e) => setEngineNumber(e.target.value)}
+                                parameterErrors={showParameterValidation ? parameterErrors : {}}
+                            />
+                            <Grid size={12} id={"filter-grid"}>
+                                <PartsFilter
+                                    filterText={filterText}
+                                    onFilterChange={onFilterChange}
+                                    onClear={() => setFilterText('')}
+                                />
+                            </Grid>
+                        </AccordionDetails>
+                    </Accordion>
+
+                    <Grid container size={12} spacing={1}
+                          sx={{flex: 1, minHeight: 0, flexWrap: 'nowrap', position: 'relative'}}>
+                        <Grid size={8} sx={{display: 'flex', minWidth: 0, position: 'relative', padding: 0}}
+                              className="parts-tree-container">
+                            <PartsTree
+                                nodes={filteredNodes}
+                                checked={checked}
+                                expanded={expanded}
+                                onCheck={onCheck}
+                                onExpand={onExpand}
                             />
                         </Grid>
-                    </AccordionDetails>
-                </Accordion>
-
-                <Grid container size={12} spacing={1} sx={{flex: 1, minHeight: 0, flexWrap: 'nowrap', position: 'relative'}}>
-                    <Grid size={8} sx={{display: 'flex', minWidth: 0, position: 'relative', padding: 0}} className="parts-tree-container">
-                        <PartsTree
-                            nodes={filteredNodes}
-                            checked={checked}
-                            expanded={expanded}
-                            onCheck={onCheck}
-                            onExpand={onExpand}
-                        />
-                    </Grid>
-                    <Grid size={4} id={"selected-grid"} sx={{display: 'flex', minWidth: 0}}>
-                        <SelectedPartsList
-                            checked={checked}
-                            nodeByValue={nodeByValue}
-                            itemFlags={itemFlags}
-                            filterText={filterText}
-                            onSelectedItemToggle={onSelectedItemToggle}
-                            onEditItem={handleEditItem}
-                            onSubmit={onSubmit}
-                            isSubmitting={isSubmitting}
-                        />
+                        <Grid size={4} id={"selected-grid"} sx={{display: 'flex', minWidth: 0}}>
+                            <SelectedPartsList
+                                checked={checked}
+                                nodeByValue={nodeByValue}
+                                itemFlags={itemFlags}
+                                filterText={filterText}
+                                onSelectedItemToggle={onSelectedItemToggle}
+                                onEditItem={handleEditItem}
+                                onSubmit={onSubmit}
+                                isSubmitting={isSubmitting}
+                            />
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-            <VehicleChangeConfirmDialog
-                open={vehicleChangeDialogOpen}
-                onCancel={handleVehicleChangeCancel}
-                onConfirm={handleVehicleChangeConfirm}
-                selectedCount={checked.length}
-                nextVehicle={pendingVehicle}
-            />
-            <PartDetailsDialog
-                open={partDialogOpen}
-                partLabel={pendingNode?.label ?? ''}
-                partValue={pendingPartValue ?? ''}
-                maxQuantity={getNodeQuantity(pendingNode)}
-                initialValues={isEditingExistingPart && pendingPartValue ? itemFlags[pendingPartValue] : undefined}
-                onApply={handlePartDialogApply}
-                onCancel={handlePartDialogCancel}
-            />
-            <RestoreOrderDialog
-                open={restoreDialogOpen}
-                orderNumber={orderNumber}
-                selectedCount={savedOrderData?.checked?.length ?? 0}
-                onRestore={handleRestoreOrder}
-                onDiscard={handleDiscardRestore}
-            />
-            <Snackbar
-                open={Boolean(submitNotification)}
-                autoHideDuration={5000}
-                onClose={() => setSubmitNotification(null)}
-                anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
-            >
-                <Alert severity={submitNotification?.severity} variant="filled"
-                       onClose={() => setSubmitNotification(null)}>
-                    {submitNotification?.message}
-                </Alert>
-            </Snackbar>
-        </div>
+                <VehicleChangeConfirmDialog
+                    open={vehicleChangeDialogOpen}
+                    onCancel={handleVehicleChangeCancel}
+                    onConfirm={handleVehicleChangeConfirm}
+                    selectedCount={checked.length}
+                    nextVehicle={pendingVehicle}
+                />
+                <PartDetailsDialog
+                    open={partDialogOpen}
+                    partLabel={pendingNode?.label ?? ''}
+                    partValue={pendingPartValue ?? ''}
+                    maxQuantity={getNodeQuantity(pendingNode)}
+                    initialValues={isEditingExistingPart && pendingPartValue ? itemFlags[pendingPartValue] : undefined}
+                    onApply={handlePartDialogApply}
+                    onCancel={handlePartDialogCancel}
+                />
+                <RestoreOrderDialog
+                    open={restoreDialogOpen}
+                    orderNumber={orderNumber}
+                    selectedCount={savedOrderData?.checked?.length ?? 0}
+                    onRestore={handleRestoreOrder}
+                    onDiscard={handleDiscardRestore}
+                />
+                <Snackbar
+                    open={Boolean(submitNotification)}
+                    autoHideDuration={5000}
+                    onClose={() => setSubmitNotification(null)}
+                    anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+                >
+                    <Alert severity={submitNotification?.severity} variant="filled"
+                           onClose={() => setSubmitNotification(null)}>
+                        {submitNotification?.message}
+                    </Alert>
+                </Snackbar>
+            </div>
         </PullToRefresh>
     );
 }
