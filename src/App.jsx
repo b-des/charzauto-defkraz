@@ -17,6 +17,7 @@ import PartsTree from "./components/PartsTree.jsx";
 import SelectedPartsList from "./components/SelectedPartsList.jsx";
 import VehicleChangeConfirmDialog from "./components/VehicleChangeConfirmDialog.jsx";
 import PartDetailsDialog from "./components/PartDetailsDialog.jsx";
+import NewPartDialog from "./components/NewPartDialog.jsx";
 import RestoreOrderDialog from "./components/RestoreOrderDialog.jsx";
 import {sendDefect} from "./api/orderApi.js";
 import {ArrowCircleDown} from "@mui/icons-material";
@@ -26,6 +27,7 @@ import {useVehicles} from "./hooks/useVehicles.js";
 
 const STORAGE_KEY_PREFIX = 'defkraz_order_';
 const DRAFT_STORAGE_KEY = `${STORAGE_KEY_PREFIX}draft`;
+const MANUAL_PARTS_GROUP_VALUE = '__manual_parts__';
 
 
 const buildNodeMap = (treeNodes) => {
@@ -69,6 +71,8 @@ function VehicleRepairComponent() {
     const [partDialogOpen, setPartDialogOpen] = useState(false);
     const [pendingPartValue, setPendingPartValue] = useState(null);
     const [isEditingExistingPart, setIsEditingExistingPart] = useState(false);
+    const [newPartDialogOpen, setNewPartDialogOpen] = useState(false);
+    const [customParts, setCustomParts] = useState({});
 
     const [restoreDialogOpen, setRestoreDialogOpen] = useState(false);
     const [savedOrderData, setSavedOrderData] = useState(null);
@@ -87,7 +91,18 @@ function VehicleRepairComponent() {
         engineNumber: !engineNumber.trim(),
     };
     const hasParameterErrors = Object.values(parameterErrors).some(Boolean);
-    const nodes = useMemo(() => vehicles.find((item) => item.value === selectedVehicle)?.nodes ?? [], [vehicles, selectedVehicle]);
+    const vehicleNodes = useMemo(
+        () => vehicles.find((item) => item.value === selectedVehicle)?.nodes ?? [],
+        [vehicles, selectedVehicle]
+    );
+    const nodes = useMemo(() => ([
+        ...vehicleNodes,
+        {
+            value: MANUAL_PARTS_GROUP_VALUE,
+            label: 'Ручне введення',
+            children: Object.values(customParts),
+        },
+    ]), [customParts, vehicleNodes]);
     const nodeByValue = useMemo(() => buildNodeMap(nodes), [nodes]);
 
     const onVehicleChange = useCallback((e) => {
@@ -103,12 +118,14 @@ function VehicleRepairComponent() {
         setChecked([]);
         setExpanded([]);
         setItemFlags({});
+        setCustomParts({});
     }, [checked.length]);
 
     const clearSelectionState = useCallback(() => {
         setChecked([]);
         setExpanded([]);
         setItemFlags({});
+        setCustomParts({});
     }, []);
 
     const handleVehicleChangeCancel = useCallback(() => {
@@ -153,6 +170,29 @@ function VehicleRepairComponent() {
             delete next[value];
             return next;
         });
+        setCustomParts((current) => {
+            if (!current[value]) return current;
+            const next = {...current};
+            delete next[value];
+            return next;
+        });
+    }, []);
+
+    const handleNewPartApply = useCallback((values) => {
+        const value = `${values.catalogNumber}#custom-${crypto.randomUUID()}`;
+        const node = {value, label: values.partName, quantity: values.quantity, isCustom: true};
+
+        setCustomParts((current) => ({...current, [value]: node}));
+        setChecked((current) => [...current, value]);
+        setItemFlags((current) => ({
+            ...current,
+            [value]: {replace: values.replace, repair: values.repair, missing: values.missing},
+        }));
+        setExpanded((current) => current.includes(MANUAL_PARTS_GROUP_VALUE)
+            ? current
+            : [...current, MANUAL_PARTS_GROUP_VALUE]);
+        setFilterText('');
+        setNewPartDialogOpen(false);
     }, []);
 
     const handlePartDialogApply = useCallback((values) => {
@@ -210,6 +250,7 @@ function VehicleRepairComponent() {
             setVehicle(savedOrderData.vehicle);
             setChecked(savedOrderData.checked);
             setItemFlags(savedOrderData.itemFlags);
+            setCustomParts(savedOrderData.customParts ?? {});
             setChassisNumber(savedOrderData.chassisNumber ?? '');
             setEngineNumber(savedOrderData.engineNumber ?? '');
         }
@@ -245,6 +286,7 @@ function VehicleRepairComponent() {
             vehicle: selectedVehicle,
             checked,
             itemFlags,
+            customParts,
             chassisNumber,
             engineNumber,
         };
@@ -283,7 +325,7 @@ function VehicleRepairComponent() {
         } finally {
             setIsSubmitting(false);
         }
-    }, [checked, orderNumber, selectedVehicle, chassisNumber, engineNumber, itemFlags, nodeByValue, hasParameterErrors]);
+    }, [checked, orderNumber, selectedVehicle, chassisNumber, engineNumber, itemFlags, customParts, nodeByValue, hasParameterErrors]);
 
     const filteredNodes = useMemo(() => {
         let searchString = filterText.trim().toLocaleLowerCase();
@@ -318,7 +360,7 @@ function VehicleRepairComponent() {
     const handleRefresh = () => {
         return new Promise((resolve, reject) => {
             // Intercept with a confirmation prompt
-            const shouldRefresh = window.confirm("Are you sure you want to refresh? Unsaved changes will be lost.");
+            const shouldRefresh = window.confirm("Ви впевнені, що хочете оновити? Незбережені зміни будуть втрачені!");
 
             if (shouldRefresh) {
                 // Run your data fetching logic
@@ -399,6 +441,7 @@ function VehicleRepairComponent() {
                                 filterText={filterText}
                                 onSelectedItemToggle={onSelectedItemToggle}
                                 onEditItem={handleEditItem}
+                                onAddItem={() => setNewPartDialogOpen(true)}
                                 onSubmit={onSubmit}
                                 isSubmitting={isSubmitting}
                             />
@@ -421,6 +464,13 @@ function VehicleRepairComponent() {
                     onApply={handlePartDialogApply}
                     onCancel={handlePartDialogCancel}
                 />
+                {newPartDialogOpen && (
+                    <NewPartDialog
+                        open
+                        onApply={handleNewPartApply}
+                        onCancel={() => setNewPartDialogOpen(false)}
+                    />
+                )}
                 <RestoreOrderDialog
                     open={restoreDialogOpen}
                     orderNumber={orderNumber}

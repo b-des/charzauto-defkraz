@@ -32,7 +32,7 @@ const PartNumber = styled('span')(({theme}) => ({
 const createDisplayNodes = (nodes) =>
     nodes.map((node) => ({
         ...node,
-        label: node.children?.length ? node.label : (
+        label: Array.isArray(node.children) ? node.label : (
             <>
                 {node.label}{' '}
                 <PartNumber>({getPartNumber(node.value)}, {node.quantity})</PartNumber>
@@ -73,6 +73,9 @@ function PartsTree({nodes, checked, expanded, onCheck, onExpand}) {
                 nodes={displayNodes}
                 expandOnClick={true}
                 onClick={() => {
+                }}
+                onContextMenu={(e) => {
+                    console.log((e));
                 }}
                 onCheck={onCheck1}
                 onExpand={onExpand}
