@@ -23,7 +23,7 @@ function NewPartDialog({open, onApply, onCancel}) {
 
     const total = replace + repair + missing;
     const remaining = quantity - total;
-    const isValid = partName.trim() && catalogNumber.trim() && quantity > 0 && total > 0 && total <= quantity;
+    const isValid = partName.trim() && quantity > 0 && total > 0 && total <= quantity;
 
     const handleApply = () => {
         onApply({
@@ -53,7 +53,6 @@ function NewPartDialog({open, onApply, onCancel}) {
                         label="Номер в каталозі"
                         value={catalogNumber}
                         onChange={(event) => setCatalogNumber(event.target.value)}
-                        required
                         fullWidth
                     />
                     <Stack direction="row" alignItems="center">
