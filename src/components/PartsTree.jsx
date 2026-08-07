@@ -43,13 +43,25 @@ const createDisplayNodes = (nodes) =>
             : undefined,
     }));
 
+const collectNodeValues = (nodes, values = new Set()) => {
+    nodes.forEach((node) => {
+        values.add(node.value);
+        collectNodeValues(node.children || [], values);
+    });
+
+    return values;
+};
+
 function PartsTree({nodes, checked, expanded, onCheck, onExpand}) {
     const showDeleteConfirmation = createConfirmation(confirmable(ConfirmationDialog));
+    const visibleNodeValues = useMemo(() => collectNodeValues(nodes), [nodes]);
 
     const onCheck1 = async (values) => {
-        const newValues = values.filter(v => !checked.includes(v));
+        const hiddenCheckedValues = checked.filter((value) => !visibleNodeValues.has(value));
+        const nextCheckedValues = [...hiddenCheckedValues, ...values];
+        const newValues = nextCheckedValues.filter(v => !checked.includes(v));
         if (newValues.length > 0) {
-            onCheck(values);
+            onCheck(nextCheckedValues);
             return;
         }
         showDeleteConfirmation({
@@ -57,7 +69,7 @@ function PartsTree({nodes, checked, expanded, onCheck, onExpand}) {
             description: 'Видалити елемент зі списку?',
         }).then(confirmed => {
             if (confirmed) {
-                onCheck(values)
+                onCheck(nextCheckedValues)
             }
         });
     }
