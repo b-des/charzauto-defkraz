@@ -415,6 +415,7 @@ function VehicleRepairComponent() {
                                 <PartsFilter
                                     filterText={filterText}
                                     onFilterChange={onFilterChange}
+                                    onFilterTextChange={setFilterText}
                                     onClear={() => setFilterText('')}
                                 />
                             </Grid>
