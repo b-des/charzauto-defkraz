@@ -4,26 +4,18 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    FormControl,
-    FormHelperText,
-    InputLabel,
-    MenuItem,
-    Select,
     Stack,
     TextField,
     Typography,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import NumberSpinner from "./NumberSpinner.jsx";
-import {getBasePartValue, getSizeChoices} from "../utils/partValue.js";
 
 function PartDetailsDialog({
                                open,
                                partLabel,
                                partValue,
                                isValueEditable,
-                               isMultiChoice,
-                               sizeItems,
                                maxQuantity,
                                initialValues,
                                onApply,
@@ -33,10 +25,6 @@ function PartDetailsDialog({
     const [repair, setRepair] = useState(0);
     const [missing, setMissing] = useState(0);
     const [value, setValue] = useState('');
-    const [sizeValue, setSizeValue] = useState('');
-    const sizeChoices = getSizeChoices({multichoice: isMultiChoice, sizeItems});
-    const requiresSizeChoice = sizeChoices.length > 0;
-    const hasValidSizeChoice = sizeChoices.some((item) => item.value === sizeValue);
 
     useEffect(() => {
         if (open) {
@@ -44,7 +32,6 @@ function PartDetailsDialog({
             setRepair(initialValues?.repair ?? 0);
             setMissing(initialValues?.missing ?? 0);
             setValue(initialValues?.value ?? partValue?.split('#')[0] ?? '');
-            setSizeValue(String(initialValues?.sizeValue ?? ''));
         }
     }, [open, initialValues, partValue]);
 
@@ -52,8 +39,7 @@ function PartDetailsDialog({
     const remaining = maxQuantity - total;
     const isValid = total > 0
         && total <= maxQuantity
-        && (!isValueEditable || value.trim().length > 0)
-        && (!requiresSizeChoice || hasValidSizeChoice);
+        && (!isValueEditable || value.trim().length > 0);
 
     const handleApply = () => {
         onApply({
@@ -61,7 +47,6 @@ function PartDetailsDialog({
             repair,
             missing,
             ...(isValueEditable && {value: value.trim()}),
-            ...(requiresSizeChoice && {sizeValue}),
         });
     };
 
@@ -75,30 +60,6 @@ function PartDetailsDialog({
                 </Typography>
 
                 <Stack spacing={2}>
-                    {requiresSizeChoice && (
-                        <FormControl fullWidth size="small" required error={!hasValidSizeChoice}>
-                            <InputLabel id="part-size-label">Розмір</InputLabel>
-                            <Select
-                                labelId="part-size-label"
-                                label="Розмір"
-                                value={sizeValue}
-                                onChange={(event) => setSizeValue(event.target.value)}
-                                autoFocus
-                            >
-                                {sizeChoices.map((item, index) => (
-                                    <MenuItem key={`${item.value}-${index}`} value={item.value}>
-                                        {item.label}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                            {!hasValidSizeChoice && <FormHelperText>Оберіть один розмір</FormHelperText>}
-                            {hasValidSizeChoice && (
-                                <FormHelperText>
-                                    Підсумкове значення: {sizeValue}{getBasePartValue(partValue)}
-                                </FormHelperText>
-                            )}
-                        </FormControl>
-                    )}
                     {isValueEditable && (
                         <TextField
                             label="Значення"
@@ -108,7 +69,7 @@ function PartDetailsDialog({
                             helperText={!value.trim() ? 'Вкажіть значення деталі' : ' '}
                             size="small"
                             fullWidth
-                            autoFocus={!requiresSizeChoice}
+                            autoFocus
                         />
                     )}
                     <Stack direction="row" alignItems="center">
