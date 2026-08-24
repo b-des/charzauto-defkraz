@@ -48,8 +48,10 @@ function PartsFilter({filterText, onFilterChange, onFilterTextChange, onClear}) 
         };
         recognition.onresult = (event) => {
             const transcript = event.results[0]?.[0]?.transcript?.trim();
-            console.log(event.results);
-            if (transcript) onFilterTextChange(transcript);
+            if (transcript) {
+                var isNumber = transcript.split(" ").filter(x => x !== "" && isFinite(x));
+                onFilterTextChange(transcript);
+            }
         };
         recognition.onerror = (event) => {
             const messages = {
