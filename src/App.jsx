@@ -17,8 +17,8 @@ import PartsTree from "./components/PartsTree.jsx";
 import SelectedPartsList from "./components/SelectedPartsList.jsx";
 import VehicleChangeConfirmDialog from "./components/VehicleChangeConfirmDialog.jsx";
 import PartDetailsDialog from "./components/PartDetailsDialog.jsx";
+import NewPartDialog from "./components/NewPartDialog.jsx";
 import RestoreOrderDialog from "./components/RestoreOrderDialog.jsx";
-import {useVehicles} from "./hooks/useVehicles.js";
 import {sendDefect} from "./api/orderApi.js";
 import {ArrowCircleDown} from "@mui/icons-material";
 import PullToRefresh from "react-simple-pull-to-refresh";
@@ -27,9 +27,11 @@ import {
     getFinalPartValue,
     hasSizeChoices
 } from "./utils/partValue.js";
+import {useVehicles} from "./hooks/useVehicles.js";
 
 const STORAGE_KEY_PREFIX = 'defkraz_order_';
 const DRAFT_STORAGE_KEY = `${STORAGE_KEY_PREFIX}draft`;
+const MANUAL_PARTS_GROUP_VALUE = '__manual_parts__';
 
 
 const buildNodeMap = (treeNodes) => {
@@ -104,6 +106,8 @@ function VehicleRepairComponent() {
     const [partDialogOpen, setPartDialogOpen] = useState(false);
     const [pendingPartValue, setPendingPartValue] = useState(null);
     const [isEditingExistingPart, setIsEditingExistingPart] = useState(false);
+    const [newPartDialogOpen, setNewPartDialogOpen] = useState(false);
+    const [customParts, setCustomParts] = useState({});
 
     const [restoreDialogOpen, setRestoreDialogOpen] = useState(false);
     const [savedOrderData, setSavedOrderData] = useState(null);
@@ -111,6 +115,8 @@ function VehicleRepairComponent() {
     const [submitNotification, setSubmitNotification] = useState(null);
     const [showParameterValidation, setShowParameterValidation] = useState(false);
     const orderNumberDebounceRef = useRef(null);
+
+    const [isErrorDismissed, setIsErrorDismissed] = useState(false);
 
     const selectedVehicle = vehicle || vehicles[0]?.value || '';
     const parameterErrors = {
@@ -120,11 +126,20 @@ function VehicleRepairComponent() {
         engineNumber: !engineNumber.trim(),
     };
     const hasParameterErrors = Object.values(parameterErrors).some(Boolean);
-    const nodes = useMemo(() => {
-        const vehicleNodes = vehicles.find((item) => item.value === selectedVehicle)?.nodes ?? [];
-
-        return createSelectablePartsTree(vehicleNodes);
-    }, [vehicles, selectedVehicle]);
+    const vehicleNodes = useMemo(
+        () => createSelectablePartsTree(
+            vehicles.find((item) => item.value === selectedVehicle)?.nodes ?? []
+        ),
+        [vehicles, selectedVehicle]
+    );
+    const nodes = useMemo(() => ([
+        ...vehicleNodes,
+        {
+            value: MANUAL_PARTS_GROUP_VALUE,
+            label: 'Ручне введення',
+            children: Object.values(customParts),
+        },
+    ]), [customParts, vehicleNodes]);
     const nodeByValue = useMemo(() => buildNodeMap(nodes), [nodes]);
 
     const onVehicleChange = useCallback((e) => {
@@ -140,12 +155,14 @@ function VehicleRepairComponent() {
         setChecked([]);
         setExpanded([]);
         setItemFlags({});
+        setCustomParts({});
     }, [checked.length]);
 
     const clearSelectionState = useCallback(() => {
         setChecked([]);
         setExpanded([]);
         setItemFlags({});
+        setCustomParts({});
     }, []);
 
     const handleVehicleChangeCancel = useCallback(() => {
@@ -206,6 +223,29 @@ function VehicleRepairComponent() {
             delete next[value];
             return next;
         });
+        setCustomParts((current) => {
+            if (!current[value]) return current;
+            const next = {...current};
+            delete next[value];
+            return next;
+        });
+    }, []);
+
+    const handleNewPartApply = useCallback((values) => {
+        const value = `${values.catalogNumber}#custom-${crypto.randomUUID()}`;
+        const node = {value, label: values.partName, quantity: values.quantity, isCustom: true};
+
+        setCustomParts((current) => ({...current, [value]: node}));
+        setChecked((current) => [...current, value]);
+        setItemFlags((current) => ({
+            ...current,
+            [value]: {replace: values.replace, repair: values.repair, missing: values.missing},
+        }));
+        setExpanded((current) => current.includes(MANUAL_PARTS_GROUP_VALUE)
+            ? current
+            : [...current, MANUAL_PARTS_GROUP_VALUE]);
+        setFilterText('');
+        setNewPartDialogOpen(false);
     }, []);
 
     const handlePartDialogApply = useCallback((values) => {
@@ -277,6 +317,7 @@ function VehicleRepairComponent() {
             setVehicle(savedOrderData.vehicle);
             setChecked(restored.checked);
             setItemFlags(restored.itemFlags);
+            setCustomParts(savedOrderData.customParts ?? {});
             setChassisNumber(savedOrderData.chassisNumber ?? '');
             setEngineNumber(savedOrderData.engineNumber ?? '');
         }
@@ -313,6 +354,7 @@ function VehicleRepairComponent() {
             vehicle: selectedVehicle,
             checked: selectableChecked,
             itemFlags,
+            customParts,
             chassisNumber,
             engineNumber,
         };
@@ -351,11 +393,13 @@ function VehicleRepairComponent() {
         } finally {
             setIsSubmitting(false);
         }
-    }, [checked, orderNumber, selectedVehicle, chassisNumber, engineNumber, itemFlags, nodeByValue, hasParameterErrors]);
+    }, [checked, orderNumber, selectedVehicle, chassisNumber, engineNumber, itemFlags, customParts, nodeByValue, hasParameterErrors]);
 
     const filteredNodes = useMemo(() => {
-        const nodeMatchesSearchString = ({label}) => (
-            label.toLocaleLowerCase().indexOf(filterText.toLocaleLowerCase()) > -1
+        let searchString = filterText.trim().toLocaleLowerCase();
+        const nodeMatchesSearchString = ({label, value}) => (
+            label.toLocaleLowerCase().indexOf(searchString) > -1 ||
+            value.toLocaleLowerCase().indexOf(searchString) > -1
         );
 
         const filterNodes = (filtered, node) => {
@@ -384,7 +428,7 @@ function VehicleRepairComponent() {
     const handleRefresh = () => {
         return new Promise((resolve, reject) => {
             // Intercept with a confirmation prompt
-            const shouldRefresh = window.confirm("Are you sure you want to refresh? Unsaved changes will be lost.");
+            const shouldRefresh = window.confirm("Ви впевнені, що хочете оновити? Незбережені зміни будуть втрачені!");
 
             if (shouldRefresh) {
                 // Run your data fetching logic
@@ -399,111 +443,125 @@ function VehicleRepairComponent() {
 
     return (
         <PullToRefresh onRefresh={handleRefresh}>
-        <div className="filter-container">
-            <Grid container spacing={1} sx={{height: '100%', flexDirection: 'column', flexWrap: 'nowrap', minHeight: 0}}>
-                {vehiclesLoading && (
-                    <Grid size={12}>
-                        <CircularProgress size={24} aria-label="Завантаження автомобілів"/>
-                    </Grid>
-                )}
-                {vehiclesError && (
-                    <Grid size={12}>
-                        <Alert severity="error" onClose={() => {}}>{vehiclesError}</Alert>
-                    </Grid>
-                )}
-                <Accordion color="primary" sx={{'&.Mui-expanded': {margin: 0}}}>
-                    <AccordionSummary
-                        color="primary"
-                        expandIcon={<ArrowCircleDown />}
-                        aria-controls={`panel1-content`}
-                        id={`panel1-header`}
-                    >
-                        <Typography component="span">Службова інформація</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <VehicleParametersBar
-                            vehicles={vehicles}
-                            vehicle={selectedVehicle}
-                            onVehicleChange={onVehicleChange}
-                            orderNumber={orderNumber}
-                            orderNumberOptions={orderNumberOptions}
-                            onOrderNumberChange={onOrderNumberChange}
-                            chassisNumber={chassisNumber}
-                            onChassisNumberChange={(e) => setChassisNumber(e.target.value)}
-                            engineNumber={engineNumber}
-                            onEngineNumberChange={(e) => setEngineNumber(e.target.value)}
-                            parameterErrors={showParameterValidation ? parameterErrors : {}}
-                        />
-                        <Grid size={12} id={"filter-grid"}>
-                            <PartsFilter
-                                filterText={filterText}
-                                onFilterChange={onFilterChange}
-                                onClear={() => setFilterText('')}
+            <div className="filter-container">
+                <Grid container spacing={1}
+                      sx={{height: '100%', flexDirection: 'column', flexWrap: 'nowrap', minHeight: 0}}>
+                    {vehiclesLoading && (
+                        <Grid size={12}>
+                            <CircularProgress size={24} aria-label="Завантаження автомобілів"/>
+                        </Grid>
+                    )}
+                    {vehiclesError && !isErrorDismissed && (
+                        <Grid size={12}>
+                            <Alert severity="error" onClose={() => setIsErrorDismissed(true)}>{vehiclesError}</Alert>
+                        </Grid>
+                    )}
+                    <Accordion color="primary" sx={{'&.Mui-expanded': {margin: 0}}}>
+                        <AccordionSummary
+                            color="primary"
+                            expandIcon={<ArrowCircleDown/>}
+                            aria-controls={`panel1-content`}
+                            id={`panel1-header`}
+                        >
+                            <Typography component="span">Службова інформація</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <VehicleParametersBar
+                                vehicles={vehicles}
+                                vehicle={selectedVehicle}
+                                onVehicleChange={onVehicleChange}
+                                orderNumber={orderNumber}
+                                orderNumberOptions={orderNumberOptions}
+                                onOrderNumberChange={onOrderNumberChange}
+                                chassisNumber={chassisNumber}
+                                onChassisNumberChange={(e) => setChassisNumber(e.target.value)}
+                                engineNumber={engineNumber}
+                                onEngineNumberChange={(e) => setEngineNumber(e.target.value)}
+                                parameterErrors={showParameterValidation ? parameterErrors : {}}
+                            />
+                            <Grid size={12} id={"filter-grid"}>
+                                <PartsFilter
+                                    filterText={filterText}
+                                    onFilterChange={onFilterChange}
+                                    onFilterTextChange={setFilterText}
+                                    onClear={() => setFilterText('')}
+                                />
+                            </Grid>
+                        </AccordionDetails>
+                    </Accordion>
+
+                    <Grid container size={12} spacing={1}
+                          sx={{flex: 1, minHeight: 0, flexWrap: 'nowrap', position: 'relative'}}>
+                        <Grid size={8} sx={{display: 'flex', minWidth: 0, position: 'relative', padding: 0}}
+                              className="parts-tree-container">
+                            <PartsTree
+                                nodes={filteredNodes}
+                                checked={checked}
+                                expanded={expanded}
+                                onCheck={onCheck}
+                                onExpand={onExpand}
                             />
                         </Grid>
-                    </AccordionDetails>
-                </Accordion>
-
-                <Grid container size={12} spacing={1} sx={{flex: 1, minHeight: 0, flexWrap: 'nowrap', position: 'relative'}}>
-                    <Grid size={8} sx={{display: 'flex', minWidth: 0, position: 'relative', padding: 0}} className="parts-tree-container">
-                        <PartsTree
-                            nodes={filteredNodes}
-                            checked={checked}
-                            expanded={expanded}
-                            onCheck={onCheck}
-                            onExpand={onExpand}
-                        />
-                    </Grid>
-                    <Grid size={4} id={"selected-grid"} sx={{display: 'flex', minWidth: 0}}>
-                        <SelectedPartsList
-                            checked={checked}
-                            nodeByValue={nodeByValue}
-                            itemFlags={itemFlags}
-                            filterText={filterText}
-                            onSelectedItemToggle={onSelectedItemToggle}
-                            onEditItem={handleEditItem}
-                            onSubmit={onSubmit}
-                            isSubmitting={isSubmitting}
-                        />
+                        <Grid size={4} id={"selected-grid"} sx={{display: 'flex', minWidth: 0}}>
+                            <SelectedPartsList
+                                checked={checked}
+                                nodeByValue={nodeByValue}
+                                itemFlags={itemFlags}
+                                filterText={filterText}
+                                onSelectedItemToggle={onSelectedItemToggle}
+                                onEditItem={handleEditItem}
+                                onAddItem={() => setNewPartDialogOpen(true)}
+                                onSubmit={onSubmit}
+                                isSubmitting={isSubmitting}
+                            />
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-            <VehicleChangeConfirmDialog
-                open={vehicleChangeDialogOpen}
-                onCancel={handleVehicleChangeCancel}
-                onConfirm={handleVehicleChangeConfirm}
-                selectedCount={checked.length}
-                nextVehicle={pendingVehicle}
-            />
-            <PartDetailsDialog
-                open={partDialogOpen}
-                partLabel={pendingNode?.selectionLabel ?? pendingNode?.label ?? ''}
-                partValue={pendingPartValue ?? ''}
-                isValueEditable={pendingNode?.editable === true}
-                maxQuantity={getNodeQuantity(pendingNode)}
-                initialValues={isEditingExistingPart && pendingPartValue ? itemFlags[pendingPartValue] : undefined}
-                onApply={handlePartDialogApply}
-                onCancel={handlePartDialogCancel}
-            />
-            <RestoreOrderDialog
-                open={restoreDialogOpen}
-                orderNumber={orderNumber}
-                selectedCount={savedOrderData?.checked?.length ?? 0}
-                onRestore={handleRestoreOrder}
-                onDiscard={handleDiscardRestore}
-            />
-            <Snackbar
-                open={Boolean(submitNotification)}
-                autoHideDuration={5000}
-                onClose={() => setSubmitNotification(null)}
-                anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
-            >
-                <Alert severity={submitNotification?.severity} variant="filled"
-                       onClose={() => setSubmitNotification(null)}>
-                    {submitNotification?.message}
-                </Alert>
-            </Snackbar>
-        </div>
+                <VehicleChangeConfirmDialog
+                    open={vehicleChangeDialogOpen}
+                    onCancel={handleVehicleChangeCancel}
+                    onConfirm={handleVehicleChangeConfirm}
+                    selectedCount={checked.length}
+                    nextVehicle={pendingVehicle}
+                />
+                {partDialogOpen && (
+                    <PartDetailsDialog
+                        open
+                        partLabel={pendingNode?.selectionLabel ?? pendingNode?.label ?? ''}
+                        partValue={pendingPartValue ?? ''}
+                        isValueEditable={pendingNode?.editable === true}
+                        maxQuantity={getNodeQuantity(pendingNode)}
+                        initialValues={isEditingExistingPart && pendingPartValue ? itemFlags[pendingPartValue] : undefined}
+                        onApply={handlePartDialogApply}
+                        onCancel={handlePartDialogCancel}
+                    />
+                )}
+                {newPartDialogOpen && (
+                    <NewPartDialog
+                        open
+                        onApply={handleNewPartApply}
+                        onCancel={() => setNewPartDialogOpen(false)}
+                    />
+                )}
+                <RestoreOrderDialog
+                    open={restoreDialogOpen}
+                    orderNumber={orderNumber}
+                    selectedCount={savedOrderData?.checked?.length ?? 0}
+                    onRestore={handleRestoreOrder}
+                    onDiscard={handleDiscardRestore}
+                />
+                <Snackbar
+                    open={Boolean(submitNotification)}
+                    autoHideDuration={5000}
+                    onClose={() => setSubmitNotification(null)}
+                    anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+                >
+                    <Alert severity={submitNotification?.severity} variant="filled"
+                           onClose={() => setSubmitNotification(null)}>
+                        {submitNotification?.message}
+                    </Alert>
+                </Snackbar>
+            </div>
         </PullToRefresh>
     );
 }

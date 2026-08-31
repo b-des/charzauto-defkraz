@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
-import {getVehicles} from '../api/vehiclesApi.js';
 import nodes from '../assets/vehicles/all.json';
+import {getVehicles} from "../api/generated/charzAPI.ts";
 
 export function useVehicles() {
     const [vehicles, setVehicles] = useState([]);
@@ -11,7 +11,7 @@ export function useVehicles() {
         const controller = new AbortController();
 
         getVehicles({signal: controller.signal})
-            .then(setVehicles)
+            .then(response => setVehicles(response.data))
             .catch((requestError) => {
                 if (requestError.name !== 'AbortError') {
                     setError('Не вдалося завантажити список автомобілів із сервера. Інформація про деталі може бути застарілою!');

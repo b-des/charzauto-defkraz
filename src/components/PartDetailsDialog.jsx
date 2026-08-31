@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {
     Dialog,
     DialogActions,
@@ -21,19 +21,10 @@ function PartDetailsDialog({
                                onApply,
                                onCancel
                            }) {
-    const [replace, setReplace] = useState(0);
-    const [repair, setRepair] = useState(0);
-    const [missing, setMissing] = useState(0);
-    const [value, setValue] = useState('');
-
-    useEffect(() => {
-        if (open) {
-            setReplace(initialValues?.replace ?? 0);
-            setRepair(initialValues?.repair ?? 0);
-            setMissing(initialValues?.missing ?? 0);
-            setValue(initialValues?.value ?? partValue?.split('#')[0] ?? '');
-        }
-    }, [open, initialValues, partValue]);
+    const [replace, setReplace] = useState(initialValues?.replace ?? 0);
+    const [repair, setRepair] = useState(initialValues?.repair ?? 0);
+    const [missing, setMissing] = useState(initialValues?.missing ?? 0);
+    const [value, setValue] = useState(initialValues?.value ?? partValue?.split('#')[0] ?? '');
 
     const total = replace + repair + missing;
     const remaining = maxQuantity - total;

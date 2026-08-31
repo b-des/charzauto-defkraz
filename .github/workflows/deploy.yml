@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   build-and-deploy:
+    name: Build application and deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -26,10 +27,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Download OpenAPI
+        run: |
+          curl -L \
+            https://github.com/b-des/charz-erp-bridge-api/releases/latest/download/openapi.json \
+            -o openapi.json
+
+      - name: Generate client
+        run: npm run generate:api
+
       - name: Build project
-        run: npm run build
         env:
           VITE_API_HOST: ${{vars.API_HOST}}
+        run: |
+            npm run build
+            echo ${VITE_API_HOST}
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4

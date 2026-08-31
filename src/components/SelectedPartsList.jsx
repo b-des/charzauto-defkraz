@@ -8,10 +8,11 @@ import {
     Paper,
     Stack,
     styled,
-    Typography
+    Typography,
+    alpha
 } from "@mui/material";
 import Button from "@mui/material/Button";
-import {Edit} from "@mui/icons-material";
+import {Add, Edit} from "@mui/icons-material";
 import {confirmable, createConfirmation} from "react-confirm";
 import ConfirmationDialog from "./ConfirmationDialog.jsx";
 import {getFinalPartValue} from "../utils/partValue.js";
@@ -41,6 +42,7 @@ function SelectedPartsList({
                                filterText,
                                onSelectedItemToggle,
                                onEditItem,
+                               onAddItem,
                                onSubmit,
                                isSubmitting
                            }) {
@@ -72,6 +74,9 @@ function SelectedPartsList({
                 Вибрано: {checked.length} деталей
                 {filterText && filteredChecked.length !== checked.length && ` (показано: ${filteredChecked.length})`}
             </Typography>
+            <Button startIcon={<Add/>} onClick={onAddItem} sx={{alignSelf: 'flex-start'}}>
+                Додати деталь
+            </Button>
             <List sx={{width: '100%', flex: 1, minHeight: 0, overflowY: 'auto', bgcolor: 'background.paper'}}>
                 {filteredChecked.map((value) => {
                     const labelId = `checkbox-list-label-${value}`;
@@ -79,6 +84,7 @@ function SelectedPartsList({
                     const label = node?.selectionLabel ?? node?.label ?? value.split('#')[0];
                     const flags = itemFlags[value] ?? {replace: 0, repair: 0, missing: 0};
                     const displayedValue = getFinalPartValue(node, value, flags);
+                    const isManual = node?.isCustom || value.includes('#custom-');
 
                     return (
                         <ListItem
@@ -89,8 +95,12 @@ function SelectedPartsList({
                                 alignItems: 'center',
                                 gap: 1,
                                 py: 0.75,
-                            }}
-                        >
+                                px: 0.5,
+                                borderRadius: 1,
+                                backgroundColor: (theme) => isManual
+                                    ? alpha(theme.palette.warning.main, 0.12)
+                                    : 'transparent',
+                            }}>
                             <Checkbox
                                 onClick={() => handleDelete(value)}
                                 edge="start"
@@ -98,22 +108,22 @@ function SelectedPartsList({
                                 tabIndex={-1}
                                 disableRipple
                                 slotProps={{input: {'aria-labelledby': labelId}}}
-                                sx={{alignSelf: 'center'}}
-                            />
+                                sx={{alignSelf: 'center'}}/>
                             <ListItemText
                                 id={labelId}
                                 primary={label}
                                 secondary={displayedValue}
                                 sx={{flex: 1, my: 0}}
                                 primaryTypographyProps={{lineHeight: 1.3}}
-                                secondaryTypographyProps={{lineHeight: 1.3}}
-                            />
+                                secondaryTypographyProps={{lineHeight: 1.3}}/>
                             <Stack
                                 direction="row"
                                 spacing={0.5}
                                 alignItems="center"
-                                sx={{flexShrink: 0, alignSelf: 'center'}}
-                            >
+                                sx={{flexShrink: 0, alignSelf: 'center'}}>
+                                {isManual && (
+                                    <Chip label="Додано вручну" size="small" color="warning" variant="outlined"/>
+                                )}
                                 {flags.replace > 0 && (
                                     <Chip label={`З: ${flags.replace}`} size="small" color="error"/>
                                 )}
@@ -131,7 +141,7 @@ function SelectedPartsList({
                     );
                 })}
             </List>
-            <Button variant="contained" color="primary" onClick={onSubmit} disabled={isSubmitting}>
+            <Button variant="contained" color="primary" onClick={onSubmit} disabled={isSubmitting || checked.length === 0}>
                 {isSubmitting ? 'Відправлення…' : 'Відправити'}
             </Button>
         </Item>

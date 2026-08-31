@@ -1,10 +1,11 @@
 import CheckboxTree from 'react-checkbox-tree';
 import {Paper, styled} from "@mui/material";
-import {CheckBoxOutlineBlank, CheckBoxOutlined, Folder, FolderOpen, Settings} from "@mui/icons-material";
+import {CheckBoxOutlineBlank, CheckBoxOutlined, Folder, FolderOpen} from "@mui/icons-material";
 
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import {confirmable, createConfirmation} from "react-confirm";
 import ConfirmationDialog from "./ConfirmationDialog.jsx";
+import {useMemo} from "react";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: '#fff',
@@ -20,13 +21,47 @@ const Item = styled(Paper)(({theme}) => ({
     }),
 }));
 
+const getPartNumber = (value) => value.split('#')[0];
+
+const PartNumber = styled('span')(({theme}) => ({
+    color: theme.palette.primary.main,
+    fontSize: theme.typography.body2,
+    fontWeight: 600,
+}));
+
+const createDisplayNodes = (nodes) =>
+    nodes.map((node) => ({
+        ...node,
+        label: Array.isArray(node.children) ? node.label : (
+            <>
+                {node.label}{' '}
+                <PartNumber>({getPartNumber(node.value)}, {node.quantity})</PartNumber>
+            </>
+        ),
+        children: node.children
+            ? createDisplayNodes(node.children)
+            : undefined,
+    }));
+
+const collectNodeValues = (nodes, values = new Set()) => {
+    nodes.forEach((node) => {
+        values.add(node.value);
+        collectNodeValues(node.children || [], values);
+    });
+
+    return values;
+};
+
 function PartsTree({nodes, checked, expanded, onCheck, onExpand}) {
     const showDeleteConfirmation = createConfirmation(confirmable(ConfirmationDialog));
+    const visibleNodeValues = useMemo(() => collectNodeValues(nodes), [nodes]);
 
     const onCheck1 = async (values) => {
-        const newValues = values.filter(v => !checked.includes(v));
+        const hiddenCheckedValues = checked.filter((value) => !visibleNodeValues.has(value));
+        const nextCheckedValues = [...hiddenCheckedValues, ...values];
+        const newValues = nextCheckedValues.filter(v => !checked.includes(v));
         if (newValues.length > 0) {
-            onCheck(values);
+            onCheck(nextCheckedValues);
             return;
         }
         showDeleteConfirmation({
@@ -34,10 +69,11 @@ function PartsTree({nodes, checked, expanded, onCheck, onExpand}) {
             description: 'Видалити елемент зі списку?',
         }).then(confirmed => {
             if (confirmed) {
-                onCheck(values)
+                onCheck(nextCheckedValues)
             }
         });
     }
+    const displayNodes = useMemo(() => createDisplayNodes(nodes), [nodes]);
     return (
         <Item>
             <CheckboxTree
@@ -46,9 +82,12 @@ function PartsTree({nodes, checked, expanded, onCheck, onExpand}) {
                 showNodeTitle={false}
                 checked={checked}
                 expanded={expanded}
-                nodes={nodes}
+                nodes={displayNodes}
                 expandOnClick={true}
                 onClick={() => {
+                }}
+                onContextMenu={(e) => {
+                    console.log((e));
                 }}
                 onCheck={onCheck1}
                 onExpand={onExpand}
