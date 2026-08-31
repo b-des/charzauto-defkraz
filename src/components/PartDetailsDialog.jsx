@@ -1,34 +1,44 @@
-import {useState, useEffect, useMemo} from 'react';
+import {useState} from 'react';
 import {
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
     Stack,
+    TextField,
     Typography,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import NumberSpinner from "./NumberSpinner.jsx";
 
-function PartDetailsDialog({open, partLabel, partValue, maxQuantity, initialValues, onApply, onCancel}) {
-    const [replace, setReplace] = useState(0);
-    const [repair, setRepair] = useState(0);
-    const [missing, setMissing] = useState(0);
-
-    useEffect(() => {
-        if (open) {
-            setReplace(initialValues?.replace ?? 0);
-            setRepair(initialValues?.repair ?? 0);
-            setMissing(initialValues?.missing ?? 0);
-        }
-    }, [open, initialValues]);
+function PartDetailsDialog({
+                               open,
+                               partLabel,
+                               partValue,
+                               isValueEditable,
+                               maxQuantity,
+                               initialValues,
+                               onApply,
+                               onCancel
+                           }) {
+    const [replace, setReplace] = useState(initialValues?.replace ?? 0);
+    const [repair, setRepair] = useState(initialValues?.repair ?? 0);
+    const [missing, setMissing] = useState(initialValues?.missing ?? 0);
+    const [value, setValue] = useState(initialValues?.value ?? partValue?.split('#')[0] ?? '');
 
     const total = replace + repair + missing;
     const remaining = maxQuantity - total;
-    const isValid = total > 0 && total <= maxQuantity;
+    const isValid = total > 0
+        && total <= maxQuantity
+        && (!isValueEditable || value.trim().length > 0);
 
     const handleApply = () => {
-        onApply({replace, repair, missing});
+        onApply({
+            replace,
+            repair,
+            missing,
+            ...(isValueEditable && {value: value.trim()}),
+        });
     };
 
     return (
@@ -41,6 +51,18 @@ function PartDetailsDialog({open, partLabel, partValue, maxQuantity, initialValu
                 </Typography>
 
                 <Stack spacing={2}>
+                    {isValueEditable && (
+                        <TextField
+                            label="Значення"
+                            value={value}
+                            onChange={(event) => setValue(event.target.value)}
+                            error={!value.trim()}
+                            helperText={!value.trim() ? 'Вкажіть значення деталі' : ' '}
+                            size="small"
+                            fullWidth
+                            autoFocus
+                        />
+                    )}
                     <Stack direction="row" alignItems="center">
                         <Typography variant="body2" sx={{width: 100, flexShrink: 0}}>На заміну</Typography>
                         <NumberSpinner

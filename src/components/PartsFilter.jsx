@@ -49,7 +49,6 @@ function PartsFilter({filterText, onFilterChange, onFilterTextChange, onClear}) 
         recognition.onresult = (event) => {
             const transcript = event.results[0]?.[0]?.transcript?.trim();
             if (transcript) {
-                var isNumber = transcript.split(" ").filter(x => x !== "" && isFinite(x));
                 onFilterTextChange(transcript);
             }
         };

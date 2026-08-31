@@ -22,8 +22,12 @@ import RestoreOrderDialog from "./components/RestoreOrderDialog.jsx";
 import {sendDefect} from "./api/orderApi.js";
 import {ArrowCircleDown} from "@mui/icons-material";
 import PullToRefresh from "react-simple-pull-to-refresh";
+import {
+    createSelectablePartsTree,
+    getFinalPartValue,
+    hasSizeChoices
+} from "./utils/partValue.js";
 import {useVehicles} from "./hooks/useVehicles.js";
-
 
 const STORAGE_KEY_PREFIX = 'defkraz_order_';
 const DRAFT_STORAGE_KEY = `${STORAGE_KEY_PREFIX}draft`;
@@ -50,6 +54,37 @@ const getNodeQuantity = (node) => {
     const quantity = Number(node?.quantity);
 
     return Number.isFinite(quantity) && quantity > 0 ? quantity : 1;
+};
+
+const restoreSelectableParts = (checkedValues, storedFlags, nodeByValue) => {
+    const checked = [];
+    const itemFlags = {};
+
+    (checkedValues || []).forEach((value) => {
+        const node = nodeByValue.get(value);
+        const details = storedFlags?.[value];
+        let restoredValue = value;
+
+        if (hasSizeChoices(node)) {
+            const selectedSizeValue = String(details?.sizeValue ?? '');
+            const selectedSizeNode = (node.children || []).find((child) => (
+                child.isSizeChoice === true
+                && child.submittedValue === selectedSizeValue
+            ));
+
+            if (!selectedSizeNode) return;
+            restoredValue = selectedSizeNode.value;
+        }
+
+        if (!checked.includes(restoredValue)) checked.push(restoredValue);
+        if (details) {
+            const restoredDetails = {...details};
+            delete restoredDetails.sizeValue;
+            itemFlags[restoredValue] = restoredDetails;
+        }
+    });
+
+    return {checked, itemFlags};
 };
 
 // Add commonly used order numbers here; users can also add values from the selector.
@@ -92,7 +127,9 @@ function VehicleRepairComponent() {
     };
     const hasParameterErrors = Object.values(parameterErrors).some(Boolean);
     const vehicleNodes = useMemo(
-        () => vehicles.find((item) => item.value === selectedVehicle)?.nodes ?? [],
+        () => createSelectablePartsTree(
+            vehicles.find((item) => item.value === selectedVehicle)?.nodes ?? []
+        ),
         [vehicles, selectedVehicle]
     );
     const nodes = useMemo(() => ([
@@ -147,10 +184,26 @@ function VehicleRepairComponent() {
         const newValues = checkedValues.filter(v => !checked.includes(v));
 
         if (newValues.length > 0) {
-            setPendingPartValue(newValues[0]);
+            const selectedValue = newValues[0];
+            const choiceGroupValue = nodeByValue.get(selectedValue)?.choiceGroupValue;
+            const nextCheckedValues = choiceGroupValue
+                ? checkedValues.filter((value) => (
+                    value === selectedValue
+                    || nodeByValue.get(value)?.choiceGroupValue !== choiceGroupValue
+                ))
+                : checkedValues;
+
+            setPendingPartValue(selectedValue);
             setIsEditingExistingPart(false);
             setPartDialogOpen(true);
-            setChecked(checkedValues);
+            setChecked(nextCheckedValues);
+            setItemFlags((current) => {
+                const next = {};
+                nextCheckedValues.forEach((value) => {
+                    if (current[value]) next[value] = current[value];
+                });
+                return next;
+            });
         } else {
             setChecked(checkedValues);
             setItemFlags((current) => {
@@ -161,7 +214,7 @@ function VehicleRepairComponent() {
                 return next;
             });
         }
-    }, [checked]);
+    }, [checked, nodeByValue]);
 
     const onSelectedItemToggle = useCallback((value) => {
         setChecked((current) => current.filter(v => v !== value));
@@ -198,7 +251,12 @@ function VehicleRepairComponent() {
     const handlePartDialogApply = useCallback((values) => {
         setItemFlags((current) => ({
             ...current,
-            [pendingPartValue]: {replace: values.replace, repair: values.repair, missing: values.missing}
+            [pendingPartValue]: {
+                replace: values.replace,
+                repair: values.repair,
+                missing: values.missing,
+                ...(values.value !== undefined && {value: values.value}),
+            }
         }));
         setPartDialogOpen(false);
         setPendingPartValue(null);
@@ -247,16 +305,25 @@ function VehicleRepairComponent() {
 
     const handleRestoreOrder = useCallback(() => {
         if (savedOrderData) {
+            const restoredNodes = createSelectablePartsTree(
+                vehicles.find((item) => item.value === savedOrderData.vehicle)?.nodes ?? []
+            );
+            const restored = restoreSelectableParts(
+                savedOrderData.checked,
+                savedOrderData.itemFlags,
+                buildNodeMap(restoredNodes)
+            );
+
             setVehicle(savedOrderData.vehicle);
-            setChecked(savedOrderData.checked);
-            setItemFlags(savedOrderData.itemFlags);
+            setChecked(restored.checked);
+            setItemFlags(restored.itemFlags);
             setCustomParts(savedOrderData.customParts ?? {});
             setChassisNumber(savedOrderData.chassisNumber ?? '');
             setEngineNumber(savedOrderData.engineNumber ?? '');
         }
         setRestoreDialogOpen(false);
         setSavedOrderData(null);
-    }, [savedOrderData]);
+    }, [savedOrderData, vehicles]);
 
     const handleDiscardRestore = useCallback(() => {
         setRestoreDialogOpen(false);
@@ -268,13 +335,14 @@ function VehicleRepairComponent() {
     }, []);
 
     const onSubmit = useCallback(async () => {
-        const selectedItems = checked.map((value) => {
+        const selectableChecked = checked.filter((value) => !hasSizeChoices(nodeByValue.get(value)));
+        const selectedItems = selectableChecked.map((value) => {
             const node = nodeByValue.get(value);
             const flags = itemFlags[value] ?? {replace: 0, repair: 0, missing: 0};
 
             return {
-                "value": value.split('#')[0],
-                label: node?.label ?? value.split('#')[0],
+                "value": getFinalPartValue(node, value, flags),
+                label: node?.selectionLabel ?? node?.label ?? value.split('#')[0],
                 quantity: getNodeQuantity(node),
                 replace: flags.replace,
                 repair: flags.repair,
@@ -284,7 +352,7 @@ function VehicleRepairComponent() {
 
         const stateToSave = {
             vehicle: selectedVehicle,
-            checked,
+            checked: selectableChecked,
             itemFlags,
             customParts,
             chassisNumber,
@@ -456,15 +524,18 @@ function VehicleRepairComponent() {
                     selectedCount={checked.length}
                     nextVehicle={pendingVehicle}
                 />
-                <PartDetailsDialog
-                    open={partDialogOpen}
-                    partLabel={pendingNode?.label ?? ''}
-                    partValue={pendingPartValue ?? ''}
-                    maxQuantity={getNodeQuantity(pendingNode)}
-                    initialValues={isEditingExistingPart && pendingPartValue ? itemFlags[pendingPartValue] : undefined}
-                    onApply={handlePartDialogApply}
-                    onCancel={handlePartDialogCancel}
-                />
+                {partDialogOpen && (
+                    <PartDetailsDialog
+                        open
+                        partLabel={pendingNode?.selectionLabel ?? pendingNode?.label ?? ''}
+                        partValue={pendingPartValue ?? ''}
+                        isValueEditable={pendingNode?.editable === true}
+                        maxQuantity={getNodeQuantity(pendingNode)}
+                        initialValues={isEditingExistingPart && pendingPartValue ? itemFlags[pendingPartValue] : undefined}
+                        onApply={handlePartDialogApply}
+                        onCancel={handlePartDialogCancel}
+                    />
+                )}
                 {newPartDialogOpen && (
                     <NewPartDialog
                         open

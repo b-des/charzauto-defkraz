@@ -15,6 +15,7 @@ import Button from "@mui/material/Button";
 import {Add, Edit} from "@mui/icons-material";
 import {confirmable, createConfirmation} from "react-confirm";
 import ConfirmationDialog from "./ConfirmationDialog.jsx";
+import {getFinalPartValue} from "../utils/partValue.js";
 
 const showDeleteConfirmation = createConfirmation(confirmable(ConfirmationDialog));
 
@@ -48,8 +49,11 @@ function SelectedPartsList({
     const filteredChecked = filterText
         ? checked.filter((value) => {
             const node = nodeByValue.get(value);
-            const label = node?.label ?? value.split('#')[0];
-            return label.toLocaleLowerCase().indexOf(filterText.toLocaleLowerCase()) > -1;
+            const label = node?.selectionLabel ?? node?.label ?? value.split('#')[0];
+            const displayedValue = getFinalPartValue(node, value, itemFlags[value]);
+            const searchableText = `${label} ${displayedValue}`.toLocaleLowerCase();
+
+            return searchableText.indexOf(filterText.toLocaleLowerCase()) > -1;
         })
         : checked;
 
@@ -77,8 +81,9 @@ function SelectedPartsList({
                 {filteredChecked.map((value) => {
                     const labelId = `checkbox-list-label-${value}`;
                     const node = nodeByValue.get(value);
-                    const label = node?.label ?? value.split('#')[0];
+                    const label = node?.selectionLabel ?? node?.label ?? value.split('#')[0];
                     const flags = itemFlags[value] ?? {replace: 0, repair: 0, missing: 0};
+                    const displayedValue = getFinalPartValue(node, value, flags);
                     const isManual = node?.isCustom || value.includes('#custom-');
 
                     return (
@@ -107,7 +112,7 @@ function SelectedPartsList({
                             <ListItemText
                                 id={labelId}
                                 primary={label}
-                                secondary={value.split('#')[0]}
+                                secondary={displayedValue}
                                 sx={{flex: 1, my: 0}}
                                 primaryTypographyProps={{lineHeight: 1.3}}
                                 secondaryTypographyProps={{lineHeight: 1.3}}/>
