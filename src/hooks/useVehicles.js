@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import nodes from '../assets/vehicles/all.json';
-import {getVehicles} from "../api/generated/charzAPI.ts";
+import {getVehiclesCatalog} from '../api/vehiclesApi.js';
 
 export function useVehicles() {
     const [vehicles, setVehicles] = useState([]);
@@ -10,10 +10,11 @@ export function useVehicles() {
     useEffect(() => {
         const controller = new AbortController();
 
-        getVehicles({signal: controller.signal})
-            .then(response => setVehicles(response.data))
+        getVehiclesCatalog({signal: controller.signal})
+            .then(setVehicles)
             .catch((requestError) => {
                 if (requestError.name !== 'AbortError') {
+                    setVehicles(nodes);
                     setError('Не вдалося завантажити список автомобілів із сервера. Інформація про деталі може бути застарілою!');
                     setTimeout(() => setError(""), 5000)
                 }
@@ -22,7 +23,6 @@ export function useVehicles() {
                 if (!controller.signal.aborted) {
                     setIsLoading(false);
                 }
-                setVehicles(nodes);
             });
 
         return () => controller.abort();
