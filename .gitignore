@@ -166,3 +166,12 @@ generated.*
 /src/api/model/
 /src/api/generated/
 openapi.json
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/

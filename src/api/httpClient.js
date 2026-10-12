@@ -1,4 +1,4 @@
-const HOST = import.meta.env.VITE_API_HOST ?? 'http://localhost:5157';
+const HOST = (import.meta.env.VITE_API_HOST ?? '').replace(/\/+$/, '');
 
 export async function getJson(url, {signal} = {}) {
     const response = await fetch(HOST + url, {signal});
